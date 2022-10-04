@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/free5gc/amf/gmm"
+	"github.com/nycu-ucr/amf/gmm"
 	"github.com/free5gc/fsm"
 )
 

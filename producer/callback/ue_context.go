@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	amf_context "github.com/free5gc/amf/context"
+	amf_context "github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/openapi/Namf_Communication"
 	"github.com/nycu-ucr/openapi/models"
 )

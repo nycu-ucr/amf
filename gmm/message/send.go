@@ -1,10 +1,10 @@
 package message
 
 import (
-	"github.com/free5gc/amf/context"
-	"github.com/free5gc/amf/logger"
-	ngap_message "github.com/free5gc/amf/ngap/message"
-	"github.com/free5gc/amf/producer/callback"
+	"github.com/nycu-ucr/amf/context"
+	"github.com/nycu-ucr/amf/logger"
+	ngap_message "github.com/nycu-ucr/amf/ngap/message"
+	"github.com/nycu-ucr/amf/producer/callback"
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/free5gc/nas/nasType"
 	"github.com/free5gc/ngap/ngapType"

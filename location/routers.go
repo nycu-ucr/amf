@@ -15,7 +15,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/free5gc/amf/logger"
+	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/logger_util"
 )
 

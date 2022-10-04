@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	amf_context "github.com/free5gc/amf/context"
-	"github.com/free5gc/amf/logger"
-	"github.com/free5gc/amf/util"
+	amf_context "github.com/nycu-ucr/amf/context"
+	"github.com/nycu-ucr/amf/logger"
+	"github.com/nycu-ucr/amf/util"
 	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
 	"github.com/nycu-ucr/openapi/models"
 )

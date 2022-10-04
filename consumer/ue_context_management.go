@@ -3,7 +3,7 @@ package consumer
 import (
 	"context"
 
-	amf_context "github.com/free5gc/amf/context"
+	amf_context "github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Nudm_UEContextManagement"
 	"github.com/nycu-ucr/openapi/models"

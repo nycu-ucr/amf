@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/free5gc/amf/context"
-	"github.com/free5gc/amf/gmm"
+	"github.com/nycu-ucr/amf/context"
+	"github.com/nycu-ucr/amf/gmm"
 	"github.com/free5gc/fsm"
 	"github.com/free5gc/nas"
 	"github.com/nycu-ucr/openapi/models"

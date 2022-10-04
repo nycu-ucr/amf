@@ -9,8 +9,8 @@ import (
 
 	"github.com/antihax/optional"
 
-	amf_context "github.com/free5gc/amf/context"
-	"github.com/free5gc/amf/util"
+	amf_context "github.com/nycu-ucr/amf/context"
+	"github.com/nycu-ucr/amf/util"
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"

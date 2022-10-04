@@ -3,8 +3,8 @@ package message
 import (
 	"encoding/hex"
 
-	"github.com/free5gc/amf/context"
-	"github.com/free5gc/amf/logger"
+	"github.com/nycu-ucr/amf/context"
+	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/ngap/ngapConvert"
 	"github.com/free5gc/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"

@@ -4,8 +4,8 @@ import (
 	"context"
 	"reflect"
 
-	amf_context "github.com/free5gc/amf/context"
-	"github.com/free5gc/amf/logger"
+	amf_context "github.com/nycu-ucr/amf/context"
+	"github.com/nycu-ucr/amf/logger"
 	"github.com/nycu-ucr/openapi/Namf_Communication"
 	"github.com/nycu-ucr/openapi/models"
 )

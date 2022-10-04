@@ -8,7 +8,7 @@ import (
 	"github.com/free5gc/amf/context"
 	"github.com/free5gc/nas"
 	"github.com/free5gc/nas/security"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func Encode(ue *context.AmfUe, msg *nas.Message) ([]byte, error) {

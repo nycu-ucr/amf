@@ -8,8 +8,8 @@ import (
 	amf_context "github.com/free5gc/amf/context"
 	"github.com/free5gc/amf/logger"
 	"github.com/free5gc/amf/util"
-	"github.com/free5gc/openapi/Nnrf_NFDiscovery"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func SendSearchNFInstances(nrfUri string, targetNfType, requestNfType models.NfType,

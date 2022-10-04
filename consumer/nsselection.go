@@ -8,9 +8,9 @@ import (
 
 	amf_context "github.com/free5gc/amf/context"
 	"github.com/free5gc/amf/logger"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/Nnssf_NSSelection"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/Nnssf_NSSelection"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func NSSelectionGetForRegistration(ue *amf_context.AmfUe, requestedNssai []models.MappingOfSnssai) (

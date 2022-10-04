@@ -9,7 +9,7 @@ import (
 	"github.com/free5gc/amf/factory"
 	"github.com/free5gc/amf/logger"
 	"github.com/free5gc/nas/security"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func InitAmfContext(context *context.AMFContext) {

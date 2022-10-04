@@ -6,9 +6,9 @@ import (
 
 	amf_context "github.com/free5gc/amf/context"
 	"github.com/free5gc/amf/logger"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/Npcf_AMPolicy"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/Npcf_AMPolicy"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func AMPolicyControlCreate(ue *amf_context.AmfUe, anType models.AccessType) (*models.ProblemDetails, error) {

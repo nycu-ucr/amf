@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	amf_context "github.com/free5gc/amf/context"
-	"github.com/free5gc/openapi/Namf_Communication"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/Namf_Communication"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func SendN2InfoNotifyN2Handover(ue *amf_context.AmfUe, releaseList []int32) error {

@@ -8,7 +8,7 @@ import (
 	"github.com/free5gc/amf/gmm"
 	"github.com/free5gc/fsm"
 	"github.com/free5gc/nas"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func Dispatch(ue *context.AmfUe, accessType models.AccessType, procedureCode int64, msg *nas.Message) error {

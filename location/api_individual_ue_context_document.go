@@ -17,8 +17,8 @@ import (
 	"github.com/free5gc/amf/logger"
 	"github.com/free5gc/amf/producer"
 	"github.com/free5gc/http_wrapper"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 // ProvideLocationInfo - Namf_Location ProvideLocationInfo service Operation

@@ -10,7 +10,7 @@ import (
 	"git.cs.nctu.edu.tw/calee/sctp"
 
 	"github.com/nycu-ucr/amf/logger"
-	"github.com/free5gc/ngap"
+	"github.com/nycu-ucr/ngap"
 )
 
 type NGAPHandler struct {

@@ -12,9 +12,9 @@ import (
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
 	"github.com/free5gc/aper"
 	"github.com/free5gc/nas/nasMessage"
-	libngap "github.com/free5gc/ngap"
-	"github.com/free5gc/ngap/ngapConvert"
-	"github.com/free5gc/ngap/ngapType"
+	libngap "github.com/nycu-ucr/ngap"
+	"github.com/nycu-ucr/ngap/ngapConvert"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )
 

@@ -33,7 +33,7 @@ import (
 	"github.com/free5gc/http2_util"
 	"github.com/free5gc/logger_util"
 	nasLogger "github.com/free5gc/nas/logger"
-	ngapLogger "github.com/free5gc/ngap/logger"
+	ngapLogger "github.com/nycu-ucr/ngap/logger"
 	openApiLogger "github.com/nycu-ucr/openapi/logger"
 	"github.com/nycu-ucr/openapi/models"
 	"github.com/free5gc/path_util"

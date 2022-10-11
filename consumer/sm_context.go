@@ -11,7 +11,7 @@ import (
 
 	amf_context "github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/util"
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
 	"github.com/nycu-ucr/openapi/Nsmf_PDUSession"

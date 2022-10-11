@@ -7,8 +7,8 @@ import (
 	gmm_message "github.com/nycu-ucr/amf/gmm/message"
 	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/fsm"
-	"github.com/free5gc/nas"
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/nycu-ucr/nas"
+	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/openapi/models"
 )
 

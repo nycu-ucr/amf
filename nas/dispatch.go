@@ -7,7 +7,7 @@ import (
 	"github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/gmm"
 	"github.com/free5gc/fsm"
-	"github.com/free5gc/nas"
+	"github.com/nycu-ucr/nas"
 	"github.com/nycu-ucr/openapi/models"
 )
 

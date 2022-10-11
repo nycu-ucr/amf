@@ -15,9 +15,9 @@ import (
 	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/fsm"
 	"github.com/free5gc/idgenerator"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/nasType"
-	"github.com/free5gc/nas/security"
+	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasType"
+	"github.com/nycu-ucr/nas/security"
 	"github.com/nycu-ucr/openapi/models"
 )
 

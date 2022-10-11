@@ -8,7 +8,7 @@ import (
 	"github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/factory"
 	"github.com/nycu-ucr/amf/logger"
-	"github.com/free5gc/nas/security"
+	"github.com/nycu-ucr/nas/security"
 	"github.com/nycu-ucr/openapi/models"
 )
 

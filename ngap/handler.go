@@ -11,7 +11,7 @@ import (
 	"github.com/nycu-ucr/amf/nas"
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
 	"github.com/free5gc/aper"
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasMessage"
 	libngap "github.com/nycu-ucr/ngap"
 	"github.com/nycu-ucr/ngap/ngapConvert"
 	"github.com/nycu-ucr/ngap/ngapType"

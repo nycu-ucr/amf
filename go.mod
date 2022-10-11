@@ -14,9 +14,6 @@ require (
 	github.com/free5gc/idgenerator v1.0.0
 	github.com/free5gc/logger_conf v1.0.0
 	github.com/free5gc/logger_util v1.0.0
-	github.com/free5gc/nas v1.0.0
-	github.com/free5gc/ngap v1.0.6 // indirect
-	github.com/free5gc/openapi v1.0.5 // indirect
 	github.com/free5gc/path_util v1.0.0
 	github.com/free5gc/version v1.0.0
 	github.com/gin-contrib/cors v1.3.1
@@ -26,6 +23,7 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
+	github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
 	github.com/nycu-ucr/openapi v0.0.0-20221004130910-a6f08329a1cf
 	github.com/sirupsen/logrus v1.9.0

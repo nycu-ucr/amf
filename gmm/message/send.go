@@ -5,8 +5,8 @@ import (
 	"github.com/nycu-ucr/amf/logger"
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
 	"github.com/nycu-ucr/amf/producer/callback"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/nasType"
+	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasType"
 	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )

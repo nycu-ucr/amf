@@ -6,8 +6,8 @@ import (
 	"reflect"
 
 	"github.com/nycu-ucr/amf/context"
-	"github.com/free5gc/nas"
-	"github.com/free5gc/nas/security"
+	"github.com/nycu-ucr/nas"
+	"github.com/nycu-ucr/nas/security"
 	"github.com/nycu-ucr/openapi/models"
 )
 

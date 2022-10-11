@@ -32,7 +32,7 @@ import (
 	fsmLogger "github.com/free5gc/fsm/logger"
 	"github.com/free5gc/http2_util"
 	"github.com/free5gc/logger_util"
-	nasLogger "github.com/free5gc/nas/logger"
+	nasLogger "github.com/nycu-ucr/nas/logger"
 	ngapLogger "github.com/nycu-ucr/ngap/logger"
 	openApiLogger "github.com/nycu-ucr/openapi/logger"
 	"github.com/nycu-ucr/openapi/models"

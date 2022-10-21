@@ -25,7 +25,7 @@ require (
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
-	github.com/nycu-ucr/openapi v0.0.0-20221004130910-a6f08329a1cf
+	github.com/nycu-ucr/openapi v0.0.0-20221021122324-56aa591470c5
 	github.com/sirupsen/logrus v1.9.0
 	github.com/urfave/cli v1.22.4
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1 // indirect

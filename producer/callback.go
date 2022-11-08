@@ -8,7 +8,6 @@ import (
 
 	"github.com/mohae/deepcopy"
 
-	"github.com/free5gc/http_wrapper"
 	"github.com/nycu-ucr/amf/consumer"
 	"github.com/nycu-ucr/amf/context"
 	gmm_message "github.com/nycu-ucr/amf/gmm/message"
@@ -16,6 +15,7 @@ import (
 	"github.com/nycu-ucr/amf/nas"
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
 	"github.com/nycu-ucr/amf/util"
+	"github.com/nycu-ucr/http_wrapper"
 	"github.com/nycu-ucr/nas/nasConvert"
 	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/ngap/ngapType"

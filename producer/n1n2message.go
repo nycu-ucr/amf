@@ -6,12 +6,12 @@ import (
 	"github.com/nycu-ucr/gonet/http"
 
 	"github.com/free5gc/aper"
-	"github.com/free5gc/http_wrapper"
 	"github.com/nycu-ucr/amf/context"
 	gmm_message "github.com/nycu-ucr/amf/gmm/message"
 	"github.com/nycu-ucr/amf/logger"
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
 	"github.com/nycu-ucr/amf/producer/callback"
+	"github.com/nycu-ucr/http_wrapper"
 	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"

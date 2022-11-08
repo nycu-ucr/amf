@@ -10,7 +10,6 @@ require (
 	github.com/free5gc/aper v1.0.4
 	github.com/free5gc/fsm v1.0.0
 	github.com/free5gc/http2_util v1.0.0
-	github.com/free5gc/http_wrapper v1.0.0
 	github.com/free5gc/idgenerator v1.0.0
 	github.com/free5gc/logger_conf v1.0.0
 	github.com/free5gc/logger_util v1.0.0
@@ -23,11 +22,11 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
-	github.com/nycu-ucr/gonet v0.0.0-20221108130155-4500a3630b77 // indirect
+	github.com/nycu-ucr/gonet v0.0.0-20221108130155-4500a3630b77
+	github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f
 	github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5
-	github.com/nycu-ucr/net v0.0.0-20221108130538-2200884e9530 // indirect
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
-	github.com/nycu-ucr/openapi v0.0.0-20221108130858-37182293b8a4
+	github.com/nycu-ucr/openapi v0.0.0-20221108131737-a03dbdc71ddb
 	github.com/sirupsen/logrus v1.9.0
 	github.com/urfave/cli v1.22.4
 	golang.org/x/oauth2 v0.1.0 // indirect

@@ -19,10 +19,10 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/google/uuid v1.1.2
-	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
-	github.com/nycu-ucr/gonet v0.0.0-20221108130155-4500a3630b77
+	github.com/nycu-ucr/gin v0.0.0-20221108140334-9ba2d17cede5
+	github.com/nycu-ucr/gonet v0.0.0-20221108134747-494161cf16d6
 	github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f
 	github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
@@ -31,6 +31,5 @@ require (
 	github.com/urfave/cli v1.22.4
 	golang.org/x/oauth2 v0.1.0 // indirect
 	golang.org/x/sys v0.2.0 // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )

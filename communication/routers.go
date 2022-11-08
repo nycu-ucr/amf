@@ -14,7 +14,7 @@ import (
 
 	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 	"github.com/sirupsen/logrus"
 
 	"github.com/free5gc/logger_util"

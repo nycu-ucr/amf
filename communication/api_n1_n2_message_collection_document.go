@@ -15,7 +15,7 @@ import (
 
 	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
 	"github.com/nycu-ucr/amf/logger"
 	"github.com/nycu-ucr/amf/producer"

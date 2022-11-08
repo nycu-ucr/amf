@@ -8,11 +8,18 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 
+	aperLogger "github.com/free5gc/aper/logger"
+	fsmLogger "github.com/free5gc/fsm/logger"
+	"github.com/free5gc/http2_util"
+	"github.com/free5gc/logger_util"
+	"github.com/free5gc/path_util"
+	pathUtilLogger "github.com/free5gc/path_util/logger"
 	"github.com/nycu-ucr/amf/communication"
 	"github.com/nycu-ucr/amf/consumer"
 	"github.com/nycu-ucr/amf/context"
@@ -28,16 +35,10 @@ import (
 	"github.com/nycu-ucr/amf/oam"
 	"github.com/nycu-ucr/amf/producer/callback"
 	"github.com/nycu-ucr/amf/util"
-	aperLogger "github.com/free5gc/aper/logger"
-	fsmLogger "github.com/free5gc/fsm/logger"
-	"github.com/free5gc/http2_util"
-	"github.com/free5gc/logger_util"
 	nasLogger "github.com/nycu-ucr/nas/logger"
 	ngapLogger "github.com/nycu-ucr/ngap/logger"
 	openApiLogger "github.com/nycu-ucr/openapi/logger"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/path_util"
-	pathUtilLogger "github.com/free5gc/path_util/logger"
 )
 
 type AMF struct{}
@@ -280,11 +281,14 @@ func (amf *AMF) Start() {
 		profile = profileTmp
 	}
 
+	t1 := time.Now()
 	if _, nfId, err := consumer.SendRegisterNFInstance(self.NrfUri, self.NfId, profile); err != nil {
 		initLog.Warnf("Send Register NF Instance failed: %+v", err)
 	} else {
 		self.NfId = nfId
 	}
+	t2 := time.Now()
+	initLog.Infof("\u001b[32;1mTime to Register NF to NRF\u001b[0m: %v (second)", t2.Sub(t1).Seconds())
 
 	signalChannel := make(chan os.Signal, 1)
 	signal.Notify(signalChannel, os.Interrupt, syscall.SIGTERM)

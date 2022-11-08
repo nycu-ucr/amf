@@ -16,8 +16,8 @@ import (
 
 	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/logger_util"
 	"github.com/nycu-ucr/amf/logger"
+	"github.com/nycu-ucr/logger_util"
 )
 
 // Route is the information for every URI.

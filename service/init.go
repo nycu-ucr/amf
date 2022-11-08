@@ -16,7 +16,6 @@ import (
 
 	aperLogger "github.com/free5gc/aper/logger"
 	fsmLogger "github.com/free5gc/fsm/logger"
-	"github.com/free5gc/http2_util"
 	"github.com/free5gc/path_util"
 	pathUtilLogger "github.com/free5gc/path_util/logger"
 	"github.com/nycu-ucr/amf/communication"
@@ -34,6 +33,7 @@ import (
 	"github.com/nycu-ucr/amf/oam"
 	"github.com/nycu-ucr/amf/producer/callback"
 	"github.com/nycu-ucr/amf/util"
+	"github.com/nycu-ucr/http2_util"
 	"github.com/nycu-ucr/logger_util"
 	nasLogger "github.com/nycu-ucr/nas/logger"
 	ngapLogger "github.com/nycu-ucr/ngap/logger"

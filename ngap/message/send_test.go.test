@@ -5,7 +5,7 @@ import (
 	"github.com/free5gc/CommonConsumerTestData/AMF/TestAmf"
 	"github.com/free5gc/CommonConsumerTestData/AMF/TestComm"
 	"github.com/free5gc/aper"
-	"github.com/free5gc/http2_util"
+	"github.com/nycu-ucr/http2_util"
 	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/nas/nasTestpacket"
 	"github.com/nycu-ucr/nas/nasType"

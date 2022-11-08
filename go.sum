@@ -110,8 +110,6 @@ github.com/free5gc/aper v1.0.4 h1:Ufbf5lzbXBOhSdUSaIdAhFMOjggsX4p6eWMrpzrrD60=
 github.com/free5gc/aper v1.0.4/go.mod h1:3K/m47BIPR2xhBkuHD1unp2LnArVtt3iTI4De0bCqpI=
 github.com/free5gc/fsm v1.0.0 h1:n4YwDx6bDdUtWLo49Z3u84dt/bOrLJjJPZX2jUM+XSQ=
 github.com/free5gc/fsm v1.0.0/go.mod h1:DGWHYWqsDJkb7ycNk9WiAe5WfbFyFTjGPEY0lfwlDg8=
-github.com/free5gc/http2_util v1.0.0 h1:0laMypHUNizAE5zsLoeJQq0R4XrfbvsLCW4NHCPpc44=
-github.com/free5gc/http2_util v1.0.0/go.mod h1:GN2BCD8IINjtnAKYGwe+dEeTBRFEv4lQnZblFIIhbdE=
 github.com/free5gc/idgenerator v1.0.0 h1:e55Cn2p8dGCGYv5VoJ6oOsTj3SIVLToNLuS2CDOulZA=
 github.com/free5gc/idgenerator v1.0.0/go.mod h1:+iGY7VUgUX88lqPhGAPGy/b2SxtNJMvymdJbNyjk4HU=
 github.com/free5gc/logger_conf v1.0.0 h1:cMqqB8L4HjE57tP36mBmiVUPIcHv8Ayr12jKfeiwqZU=
@@ -230,7 +228,6 @@ github.com/googleapis/go-type-adapters v1.0.0/go.mod h1:zHW75FOG2aur7gAO2B+MLby+
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 h1:EGx4pi6eqNxGaHF6qqu48+N2wcFQ5qg5FXgOdqsJ5d8=
 github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1/go.mod h1:wJfORRmW1u3UXTncJ5qlYoELFm8eSnnEO6hX4iZ3EWY=
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
-github.com/h2non/parth v0.0.0-20190131123155-b4df798d6542 h1:2VTzZjLZBgl62/EtslCrtky5vbi9dd7HrQPQIx6wqiw=
 github.com/h2non/parth v0.0.0-20190131123155-b4df798d6542/go.mod h1:Ow0tF8D4Kplbc8s8sSb3V2oUCygFHVp8gC3Dn6U4MNI=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
@@ -273,7 +270,6 @@ github.com/modern-go/reflect2 v1.0.2 h1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9G
 github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjYzDa0/r8luk=
 github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 h1:RWengNIwukTxcDr9M+97sNutRR1RKhG96O6jWumTTnw=
 github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826/go.mod h1:TaXosZuwdSHYgviHp1DAtfrULt5eUgsSMsZf+YrPgl8=
-github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32 h1:W6apQkHrMkS0Muv8G/TipAy/FJl/rCYT0+EuS8+Z0z4=
 github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uYLpLIr5fm8diHn0JbqRycJi6w0Ms=
 github.com/nycu-ucr/cors v0.0.0-20221108151123-ce0e42c254d8 h1:F7RqJ/X5TPAoW2Sw/WSP9e76vidP60CEV8Upegu8OaU=
 github.com/nycu-ucr/cors v0.0.0-20221108151123-ce0e42c254d8/go.mod h1:VHysIAXMHmBn5yeHiUkJ2Pp0+jnli0nSzpc8YqYP9/I=
@@ -282,6 +278,8 @@ github.com/nycu-ucr/gin v0.0.0-20221108140334-9ba2d17cede5/go.mod h1:3DD+IQKIDhm
 github.com/nycu-ucr/gonet v0.0.0-20221108130155-4500a3630b77/go.mod h1:RJXqx/AFRiJR1NLNWmZ7BXbeaTftYhmW1yKA+Zuhe4c=
 github.com/nycu-ucr/gonet v0.0.0-20221108134747-494161cf16d6 h1:zBHSJE7Q3RmkBeKLM9y4u5//kibDi6WzbAUBae/m3B0=
 github.com/nycu-ucr/gonet v0.0.0-20221108134747-494161cf16d6/go.mod h1:RJXqx/AFRiJR1NLNWmZ7BXbeaTftYhmW1yKA+Zuhe4c=
+github.com/nycu-ucr/http2_util v0.0.0-20221108151948-c49e54f5038f h1:GxcNNvwaKS35HVDqiZskb6auZ6J0WzCHevU+6QGZDAo=
+github.com/nycu-ucr/http2_util v0.0.0-20221108151948-c49e54f5038f/go.mod h1:cvsTnxrdKXpPsn8e270c8dkNOeSP2e79FB81V0LbBoI=
 github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f h1:b6KW4+rpjB7ElLN6xL9gUVYKnGe81SzZ0PxNrN1FlzQ=
 github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f/go.mod h1:nJvSLOAfXTo7vsMSYnB4bpncckfxdoI0L4mgducwk5A=
 github.com/nycu-ucr/logger_util v0.0.0-20221108143044-7079981b07b7 h1:gMe+jBHUTDUkfI2dcI+243sepm2oun95sEiaYvOoGfI=
@@ -296,8 +294,8 @@ github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94/go.mod h1:+oElDXseM9
 github.com/nycu-ucr/onvmpoller v0.0.0-20220929124448-6a86f69361a1 h1:t3KkOXgGM4OGguogcEFKHmD+XmxnWRuG+qvIjPc+J/0=
 github.com/nycu-ucr/onvmpoller v0.0.0-20220929124448-6a86f69361a1/go.mod h1:ACxx8tnYzE/QXmX9IvIBYQKhp3EwJspAsz141gRCoP0=
 github.com/nycu-ucr/openapi v0.0.0-20221004130910-a6f08329a1cf/go.mod h1:rAN/eAaxLuVHucW+MJA34g2VkoWV46gJupSs/Q9Vvfg=
-github.com/nycu-ucr/openapi v0.0.0-20221108131737-a03dbdc71ddb h1:Zz/gBw+9Hm4iNYaGk7pdf5zKRU4Ix5lPI3gFBlROUas=
-github.com/nycu-ucr/openapi v0.0.0-20221108131737-a03dbdc71ddb/go.mod h1:d0lGN6w09wMjx1FetXWZwo5tj6cj+70j9hvdatmhnXU=
+github.com/nycu-ucr/openapi v0.0.0-20221108152344-c4901efb0ee7 h1:1MOpUswDVmJdm86Nft2xwVgyx8D4t6cCDUXS54dNFw0=
+github.com/nycu-ucr/openapi v0.0.0-20221108152344-c4901efb0ee7/go.mod h1:d0lGN6w09wMjx1FetXWZwo5tj6cj+70j9hvdatmhnXU=
 github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347 h1:TTevBy56sviIo1sQXxqzGOWVg8EprP+cDIdbZgB0vu8=
 github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347/go.mod h1:cTHuRZqz4zKejBiZsJj4N2oeGFw3XE2z2QzX+9/gJvs=
 github.com/pelletier/go-toml/v2 v2.0.5 h1:ipoSadvV8oGUjnUbMub59IDPPwfxF694nG/jwbMiyQg=
@@ -819,7 +817,6 @@ gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8
 gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c h1:Hei/4ADfdWqJk1ZMxUNpqntNwaWcugrBjAiHlqqRiVk=
 gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c/go.mod h1:JHkPIbrfpd72SG/EVd6muEfDQjcINNoR0C8j2r3qZ4Q=
 gopkg.in/errgo.v2 v2.1.0/go.mod h1:hNsd1EY+bozCKY1Ytp96fpM3vjJbqLJn88ws8XvfDNI=
-gopkg.in/h2non/gock.v1 v1.1.2 h1:jBbHXgGBK/AoPVfJh5x4r/WxIrElvbLel8TCZkkZJoY=
 gopkg.in/h2non/gock.v1 v1.1.2/go.mod h1:n7UGz/ckNChHiK05rDoiC4MYSunEC/lyaUm2WWaDva0=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.3/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=

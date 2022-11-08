@@ -1,11 +1,11 @@
 package producer
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
+	"github.com/free5gc/http_wrapper"
 	"github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/logger"
-	"github.com/free5gc/http_wrapper"
 	"github.com/nycu-ucr/openapi/models"
 )
 

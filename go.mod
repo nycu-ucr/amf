@@ -23,12 +23,15 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
+	github.com/nycu-ucr/gonet v0.0.0-20221108130155-4500a3630b77 // indirect
 	github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5
+	github.com/nycu-ucr/net v0.0.0-20221108130538-2200884e9530 // indirect
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
-	github.com/nycu-ucr/openapi v0.0.0-20221024142501-e53cc2482baf
+	github.com/nycu-ucr/openapi v0.0.0-20221108130858-37182293b8a4
 	github.com/sirupsen/logrus v1.9.0
 	github.com/urfave/cli v1.22.4
-	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1 // indirect
+	golang.org/x/oauth2 v0.1.0 // indirect
+	golang.org/x/sys v0.2.0 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0
 )

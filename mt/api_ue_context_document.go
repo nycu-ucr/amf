@@ -10,13 +10,13 @@
 package mt
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/free5gc/http_wrapper"
 	"github.com/nycu-ucr/amf/logger"
 	"github.com/nycu-ucr/amf/producer"
-	"github.com/free5gc/http_wrapper"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/models"
 )

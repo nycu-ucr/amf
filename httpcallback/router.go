@@ -1,14 +1,15 @@
 package httpcallback
 
 import (
-	"net/http"
 	"strings"
+
+	"github.com/nycu-ucr/gonet/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 
-	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/logger_util"
+	"github.com/nycu-ucr/amf/logger"
 )
 
 var HttpLog *logrus.Entry

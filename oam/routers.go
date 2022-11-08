@@ -1,13 +1,13 @@
 package oam
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/logger_util"
+	"github.com/nycu-ucr/amf/logger"
 )
 
 // Route is the information for every URI.

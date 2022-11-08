@@ -3,7 +3,8 @@ package consumer
 import (
 	"context"
 	"fmt"
-	"net/http"
+
+	"github.com/nycu-ucr/gonet/http"
 
 	amf_context "github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/logger"

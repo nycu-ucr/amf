@@ -12,12 +12,10 @@ package eventexposure
 import (
 	"strings"
 
-	"github.com/nycu-ucr/gonet/http"
-
-	"github.com/gin-gonic/gin"
-
-	"github.com/free5gc/logger_util"
 	"github.com/nycu-ucr/amf/logger"
+	"github.com/nycu-ucr/gin"
+	"github.com/nycu-ucr/gonet/http"
+	"github.com/nycu-ucr/logger_util"
 )
 
 // Route is the information for every URI.

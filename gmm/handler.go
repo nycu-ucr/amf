@@ -12,16 +12,15 @@ import (
 	"time"
 
 	"github.com/antihax/optional"
+	"github.com/free5gc/fsm"
 	"github.com/mitchellh/mapstructure"
 	"github.com/mohae/deepcopy"
-
 	"github.com/nycu-ucr/amf/consumer"
 	"github.com/nycu-ucr/amf/context"
 	gmm_message "github.com/nycu-ucr/amf/gmm/message"
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
 	"github.com/nycu-ucr/amf/producer/callback"
 	"github.com/nycu-ucr/amf/util"
-	"github.com/free5gc/fsm"
 	"github.com/nycu-ucr/nas"
 	"github.com/nycu-ucr/nas/nasConvert"
 	"github.com/nycu-ucr/nas/nasMessage"

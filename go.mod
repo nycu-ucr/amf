@@ -18,15 +18,14 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
 	github.com/nycu-ucr/cors v0.0.0-20221108151123-ce0e42c254d8
-	github.com/nycu-ucr/gin v0.0.0-20221108140334-9ba2d17cede5
-	github.com/nycu-ucr/gonet v0.0.0-20230214053946-2f5515604c06
-	github.com/nycu-ucr/http2_util v0.0.0-20230213074247-99b574560ae4
+	github.com/nycu-ucr/gin v0.0.0-20230224065233-0182b69a4e14
+	github.com/nycu-ucr/gonet v0.0.0-20230224064046-12c0ad6b3211
+	github.com/nycu-ucr/http2_util v0.0.0-20230224065147-ff0ba4feb4b0
 	github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f
 	github.com/nycu-ucr/logger_util v0.0.0-20221108143044-7079981b07b7
 	github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5
-	github.com/nycu-ucr/net v0.0.0-20230213095825-a2603f1a06e9 // indirect
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
-	github.com/nycu-ucr/openapi v0.0.0-20230213074007-db43c56e0efa
+	github.com/nycu-ucr/openapi v0.0.0-20230224065032-21971add2584
 	github.com/sirupsen/logrus v1.9.0
 	github.com/urfave/cli v1.22.4
 	golang.org/x/oauth2 v0.1.0 // indirect

@@ -279,10 +279,11 @@ github.com/nycu-ucr/gin v0.0.0-20230224065233-0182b69a4e14/go.mod h1:UhAaYZ5GyzN
 github.com/nycu-ucr/gonet v0.0.0-20221108130155-4500a3630b77/go.mod h1:RJXqx/AFRiJR1NLNWmZ7BXbeaTftYhmW1yKA+Zuhe4c=
 github.com/nycu-ucr/gonet v0.0.0-20221108134747-494161cf16d6/go.mod h1:RJXqx/AFRiJR1NLNWmZ7BXbeaTftYhmW1yKA+Zuhe4c=
 github.com/nycu-ucr/gonet v0.0.0-20230214053946-2f5515604c06/go.mod h1:UtFD3rj0EmxzDcHjOnuFc/4+i/gBQdE4nGU2Nx8gLS4=
-github.com/nycu-ucr/gonet v0.0.0-20230224064046-12c0ad6b3211 h1:5jDQkxPiAjoITjxPpVHicC+VUrd6rlit0afOSBe/SMc=
 github.com/nycu-ucr/gonet v0.0.0-20230224064046-12c0ad6b3211/go.mod h1:Sz4ZVhcMgT3X7tcy/sDkzPwPJtLTdslKt0blQXD7ID4=
-github.com/nycu-ucr/http2_util v0.0.0-20230224065147-ff0ba4feb4b0 h1:sYwtEgQJGu3CnENMZa1wGgOQZxPhxRkn2bm0LjLMr4U=
-github.com/nycu-ucr/http2_util v0.0.0-20230224065147-ff0ba4feb4b0/go.mod h1:+9C2X3mgE0ly6VkeCCberLckdlSCWKHuMxejTFvlEzg=
+github.com/nycu-ucr/gonet v0.0.0-20230307120806-af99a970179a h1:DG9LmtuEdLzuUS6E2ZGAmqzbmaG2h2qNJqBNHdLFy84=
+github.com/nycu-ucr/gonet v0.0.0-20230307120806-af99a970179a/go.mod h1:cPF8F0SmgbT7zt0+o5jqnLoExn3sH3X33KHpOqMX32U=
+github.com/nycu-ucr/http2_util v0.0.0-20230307121002-14e0455be81e h1:c0UER3Fv6ltFBsddKD4YwM18UyPC/KkbH6OsGz53X1A=
+github.com/nycu-ucr/http2_util v0.0.0-20230307121002-14e0455be81e/go.mod h1:VPE/qa4WIfua62lC0xuWr4+vgku6vI1TE7Vq5czi/Cg=
 github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f h1:b6KW4+rpjB7ElLN6xL9gUVYKnGe81SzZ0PxNrN1FlzQ=
 github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f/go.mod h1:nJvSLOAfXTo7vsMSYnB4bpncckfxdoI0L4mgducwk5A=
 github.com/nycu-ucr/logger_util v0.0.0-20221108143044-7079981b07b7 h1:gMe+jBHUTDUkfI2dcI+243sepm2oun95sEiaYvOoGfI=
@@ -291,8 +292,10 @@ github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5 h1:iTz1Z0womfEPtSLMvq
 github.com/nycu-ucr/nas v0.0.0-20221011122256-5e511384efd5/go.mod h1:lKYvGb4b80shWRkE6uVyhHBPjN9Nad7/bQcMb58RCj0=
 github.com/nycu-ucr/net v0.0.0-20221003123526-abb8364ebf8f/go.mod h1:wuwy0kw+Rsg8hTUTskwVy5CcABExM2ml8gpmEm/4gFg=
 github.com/nycu-ucr/net v0.0.0-20221108130538-2200884e9530/go.mod h1:cX7CZkKCdiA1Vdgoc3/cvzZ+hdvrmZr943wuv//C33k=
-github.com/nycu-ucr/net v0.0.0-20230224063949-d0c9417d961d h1:DG2WobILKdMqDIXJDNmVIDpkC3BUvR5MXPNrxpGIpks=
 github.com/nycu-ucr/net v0.0.0-20230224063949-d0c9417d961d/go.mod h1:YhEbietZ3Djp1HrSoJX3uSooye2EtI0EV+WrUOE7fs4=
+github.com/nycu-ucr/net v0.0.0-20230307082433-9b26c4d2ffa5/go.mod h1:YhEbietZ3Djp1HrSoJX3uSooye2EtI0EV+WrUOE7fs4=
+github.com/nycu-ucr/net v0.0.0-20230307120859-5f5d7afdaf03 h1:63CLILoS3GKYRDxUfhr+I6cA+qOkzVeeJIWtTwm5TzU=
+github.com/nycu-ucr/net v0.0.0-20230307120859-5f5d7afdaf03/go.mod h1:DOdS2y4k3JZ2dWZ9UHlhmfbSbxapyoykA9JsSELPR00=
 github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94 h1:/Yc36gLetXJzKyhdEGK1tsABVzRnWjSxdqsOzifb2AI=
 github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94/go.mod h1:+oElDXseM9epVUkPPvv7li8i9b7q9G19ABRpMCFMrFU=
 github.com/nycu-ucr/onvmpoller v0.0.0-20220929124448-6a86f69361a1/go.mod h1:ACxx8tnYzE/QXmX9IvIBYQKhp3EwJspAsz141gRCoP0=
@@ -300,8 +303,8 @@ github.com/nycu-ucr/onvmpoller v0.0.0-20230206045804-e3f65dd61911/go.mod h1:KGOJ
 github.com/nycu-ucr/onvmpoller v0.0.0-20230222141454-8145d720d05c h1:4i0Ca0mJ+uFxBXAP0LJV7eiFVHxeBAvEYcesqQJDe9s=
 github.com/nycu-ucr/onvmpoller v0.0.0-20230222141454-8145d720d05c/go.mod h1:KGOJFB22ziiaSu3FEpKZLBmwwbH2XIvcI7AigdWRxNU=
 github.com/nycu-ucr/openapi v0.0.0-20221004130910-a6f08329a1cf/go.mod h1:rAN/eAaxLuVHucW+MJA34g2VkoWV46gJupSs/Q9Vvfg=
-github.com/nycu-ucr/openapi v0.0.0-20230224065032-21971add2584 h1:tnHwU3Qsq1wu3D4MCs9GlXMaJjOkKUFLK1gxSkQ3Q7Q=
-github.com/nycu-ucr/openapi v0.0.0-20230224065032-21971add2584/go.mod h1:e/DgNaZGwGlnjovxBWBg/rMuKKuut99DiSt7G006xXk=
+github.com/nycu-ucr/openapi v0.0.0-20230307121121-a96149972cfe h1:MH7ih0fd2ujEPE6NC4sBVpd7VkeUuJxbNMLidm8zsso=
+github.com/nycu-ucr/openapi v0.0.0-20230307121121-a96149972cfe/go.mod h1:Ltu58+gMiI96XBXRxqfAXU3lrGmnhBZ36AaLWtNUYCs=
 github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347 h1:TTevBy56sviIo1sQXxqzGOWVg8EprP+cDIdbZgB0vu8=
 github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347/go.mod h1:cTHuRZqz4zKejBiZsJj4N2oeGFw3XE2z2QzX+9/gJvs=
 github.com/pelletier/go-toml/v2 v2.0.5 h1:ipoSadvV8oGUjnUbMub59IDPPwfxF694nG/jwbMiyQg=

@@ -87,6 +87,8 @@ func N1N2MessageTransferProcedure(ueContextID string, reqUri string,
 		}
 		return nil, "", problemDetails, nil
 	}
+	ue.SmContextListLock.Lock()
+	defer ue.SmContextListLock.Unlock()
 
 	if requestData.N1MessageContainer != nil {
 		switch requestData.N1MessageContainer.N1MessageClass {
@@ -242,7 +244,6 @@ func N1N2MessageTransferProcedure(ueContextID string, reqUri string,
 	}
 
 	// UE is CM-IDLE
-
 	// 409: transfer a N2 PDU Session Resource Release Command to a 5G-AN and if the UE is in CM-IDLE
 	if n2Info != nil && requestData.N2InfoContainer.SmInfo.N2InfoContent.NgapIeType == models.NgapIeType_PDU_RES_REL_CMD {
 		transferErr = new(models.N1N2MessageTransferError)

@@ -12,9 +12,9 @@ import (
 	"github.com/sirupsen/logrus"
 
 	"github.com/free5gc/UeauCommon"
-	"github.com/nycu-ucr/amf/logger"
 	"github.com/free5gc/fsm"
 	"github.com/free5gc/idgenerator"
+	"github.com/nycu-ucr/amf/logger"
 	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/nas/nasType"
 	"github.com/nycu-ucr/nas/security"
@@ -127,7 +127,8 @@ type AmfUe struct {
 	// map[int64]models.UeN1N2InfoSubscriptionCreateData; use n1n2MessageSubscriptionID as key
 	N1N2MessageSubscription sync.Map
 	/* Pdu Sesseion context */
-	SmContextList sync.Map // map[int32]*SmContext, pdu session id as key
+	SmContextList     sync.Map // map[int32]*SmContext, pdu session id as key
+	SmContextListLock sync.Mutex
 	/* Related Context*/
 	RanUe map[models.AccessType]*RanUe
 	/* other */

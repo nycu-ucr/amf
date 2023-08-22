@@ -23,6 +23,7 @@ import (
 	"github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/eventexposure"
 	"github.com/nycu-ucr/amf/factory"
+	"github.com/nycu-ucr/amf/gmm"
 	"github.com/nycu-ucr/amf/httpcallback"
 	"github.com/nycu-ucr/amf/location"
 	"github.com/nycu-ucr/amf/logger"
@@ -309,6 +310,7 @@ func (amf *AMF) Start() {
 		initLog.Warnf("Initialize HTTP server: %+v", err)
 	}
 
+	go gmm.PduSessionEstReqHandler()
 	serverScheme := factory.AmfConfig.Configuration.Sbi.Scheme
 	if serverScheme == "http" {
 		err = server.ListenAndServe()

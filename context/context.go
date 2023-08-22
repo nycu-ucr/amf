@@ -8,11 +8,13 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
+	"github.com/free5gc/idgenerator"
 	"github.com/nycu-ucr/amf/factory"
 	"github.com/nycu-ucr/amf/logger"
-	"github.com/free5gc/idgenerator"
+	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/openapi/models"
 )
 
@@ -33,40 +35,78 @@ func init() {
 	AMF_Self().PlmnSupportList = make([]factory.PlmnSupportItem, 0, MaxNumOfPLMNs)
 	AMF_Self().NfService = make(map[models.ServiceName]models.NfService)
 	AMF_Self().NetworkName.Full = "free5GC"
+	AMF_Self().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, 16)
+	AMF_Self().PduSessionEstReqCounter = &PduSessionEstablishmentRequestCounter{
+		Limit:      16,
+		SignalChan: make(chan bool, 1),
+		counter:    new(atomic.Int32),
+		lock:       new(sync.Mutex),
+	}
 	tmsiGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfStatusSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfUeNGAPIDGenerator = idgenerator.NewGenerator(1, MaxValueOfAmfUeNgapId)
 }
 
+type PduSessionEstablishmentRequestElem struct {
+	Ue             *AmfUe
+	AnType         models.AccessType
+	UlNasTransport *nasMessage.ULNASTransport
+	DoneChan       chan error
+}
+
+type PduSessionEstablishmentRequestCounter struct {
+	Limit      int32
+	SignalChan chan bool
+	counter    *atomic.Int32
+	lock       *sync.Mutex
+}
+
+func (c *PduSessionEstablishmentRequestCounter) AddOne() int32 {
+	c.counter.Add(1)
+	return c.counter.Load()
+}
+
+func (c *PduSessionEstablishmentRequestCounter) MinusOne() {
+	logger.ContextLog.Infoln("MinusOne")
+	if c.counter.Load() == c.Limit {
+		c.counter.Add(-1)
+		c.SignalChan <- true
+	} else {
+		c.counter.Add(-1)
+	}
+}
+
 type AMFContext struct {
-	EventSubscriptionIDGenerator    *idgenerator.IDGenerator
-	EventSubscriptions              sync.Map
-	UePool                          sync.Map         // map[supi]*AmfUe
-	RanUePool                       sync.Map         // map[AmfUeNgapID]*RanUe
-	AmfRanPool                      sync.Map         // map[net.Conn]*AmfRan
-	LadnPool                        map[string]*LADN // dnn as key
-	SupportTaiLists                 []models.Tai
-	ServedGuamiList                 []models.Guami
-	PlmnSupportList                 []factory.PlmnSupportItem
-	RelativeCapacity                int64
-	NfId                            string
-	Name                            string
-	NfService                       map[models.ServiceName]models.NfService // nfservice that amf support
-	UriScheme                       models.UriScheme
-	BindingIPv4                     string
-	SBIPort                         int
-	RegisterIPv4                    string
-	HttpIPv6Address                 string
-	TNLWeightFactor                 int64
-	SupportDnnLists                 []string
-	AMFStatusSubscriptions          sync.Map // map[subscriptionID]models.SubscriptionData
-	NrfUri                          string
-	SecurityAlgorithm               SecurityAlgorithm
-	NetworkName                     factory.NetworkName
-	NgapIpList                      []string // NGAP Server IP
-	T3502Value                      int      // unit is second
-	T3512Value                      int      // unit is second
-	Non3gppDeregistrationTimerValue int      // unit is second
+	EventSubscriptionIDGenerator       *idgenerator.IDGenerator
+	EventSubscriptions                 sync.Map
+	UePool                             sync.Map         // map[supi]*AmfUe
+	RanUePool                          sync.Map         // map[AmfUeNgapID]*RanUe
+	AmfRanPool                         sync.Map         // map[net.Conn]*AmfRan
+	LadnPool                           map[string]*LADN // dnn as key
+	SupportTaiLists                    []models.Tai
+	ServedGuamiList                    []models.Guami
+	PlmnSupportList                    []factory.PlmnSupportItem
+	RelativeCapacity                   int64
+	NfId                               string
+	Name                               string
+	NfService                          map[models.ServiceName]models.NfService // nfservice that amf support
+	UriScheme                          models.UriScheme
+	BindingIPv4                        string
+	SBIPort                            int
+	RegisterIPv4                       string
+	HttpIPv6Address                    string
+	TNLWeightFactor                    int64
+	SupportDnnLists                    []string
+	AMFStatusSubscriptions             sync.Map // map[subscriptionID]models.SubscriptionData
+	NrfUri                             string
+	SecurityAlgorithm                  SecurityAlgorithm
+	NetworkName                        factory.NetworkName
+	NgapIpList                         []string // NGAP Server IP
+	T3502Value                         int      // unit is second
+	T3512Value                         int      // unit is second
+	Non3gppDeregistrationTimerValue    int      // unit is second
+	PduSessionEstablishmentRequestChan chan PduSessionEstablishmentRequestElem
+	PduSessionEstReqCounter            *PduSessionEstablishmentRequestCounter
 	// read-only fields
 	T3513Cfg factory.TimerValue
 	T3522Cfg factory.TimerValue

@@ -1,10 +1,10 @@
 package message
 
 import (
+	"github.com/free5gc/aper"
 	"github.com/nycu-ucr/amf/context"
 	"github.com/nycu-ucr/amf/logger"
 	"github.com/nycu-ucr/amf/producer/callback"
-	"github.com/free5gc/aper"
 	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )

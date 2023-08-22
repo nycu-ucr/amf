@@ -4,13 +4,13 @@ import (
 	"encoding/hex"
 	"strconv"
 
+	"github.com/free5gc/aper"
 	"github.com/nycu-ucr/amf/consumer"
 	"github.com/nycu-ucr/amf/context"
 	gmm_message "github.com/nycu-ucr/amf/gmm/message"
 	"github.com/nycu-ucr/amf/logger"
 	"github.com/nycu-ucr/amf/nas"
 	ngap_message "github.com/nycu-ucr/amf/ngap/message"
-	"github.com/free5gc/aper"
 	"github.com/nycu-ucr/nas/nasMessage"
 	libngap "github.com/nycu-ucr/ngap"
 	"github.com/nycu-ucr/ngap/ngapConvert"
@@ -1100,7 +1100,7 @@ func HandlePDUSessionResourceSetupResponse(ran *context.AmfRan, message *ngapTyp
 			}
 		}
 
-		if pDUSessionResourceFailedToSetupList != nil {
+		if pDUSessionResourceFailedToSetupList != nil { // Here
 			ranUe.Log.Trace("Send PDUSessionResourceSetupUnsuccessfulTransfer to SMF")
 
 			for _, item := range pDUSessionResourceFailedToSetupList.List {
@@ -1128,6 +1128,7 @@ func HandlePDUSessionResourceSetupResponse(ran *context.AmfRan, message *ngapTyp
 	if criticalityDiagnostics != nil {
 		printCriticalityDiagnostics(ran, criticalityDiagnostics)
 	}
+	context.AMF_Self().PduSessionEstReqCounter.MinusOne()
 }
 
 func HandlePDUSessionResourceModifyResponse(ran *context.AmfRan, message *ngapType.NGAPPDU) {

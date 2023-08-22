@@ -32,6 +32,23 @@ import (
 	"github.com/nycu-ucr/openapi/models"
 )
 
+func PduSessionEstReqHandler() {
+	amfSelf := context.AMF_Self()
+	var counterValue int32
+
+	for elem := range amfSelf.PduSessionEstablishmentRequestChan {
+		counterValue = amfSelf.PduSessionEstReqCounter.AddOne()
+		elem.Ue.GmmLog.Infoln("Counter Value: ", counterValue)
+		go func() {
+			elem.DoneChan <- transport5GSMMessage(elem.Ue, elem.AnType, elem.UlNasTransport)
+		}()
+		if counterValue == amfSelf.PduSessionEstReqCounter.Limit {
+			elem.Ue.GmmLog.Infoln("Counter up to limit, wait for signal")
+			<-amfSelf.PduSessionEstReqCounter.SignalChan
+		}
+	}
+}
+
 func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 	ulNasTransport *nasMessage.ULNASTransport) error {
 	ue.GmmLog.Infoln("Handle UL NAS Transport")
@@ -43,7 +60,15 @@ func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 	switch ulNasTransport.GetPayloadContainerType() {
 	// TS 24.501 5.4.5.2.3 case a)
 	case nasMessage.PayloadContainerTypeN1SMInfo:
-		return transport5GSMMessage(ue, anType, ulNasTransport)
+		// return transport5GSMMessage(ue, anType, ulNasTransport)
+		elem := context.PduSessionEstablishmentRequestElem{
+			Ue:             ue,
+			AnType:         anType,
+			UlNasTransport: ulNasTransport,
+			DoneChan:       make(chan error),
+		}
+		context.AMF_Self().PduSessionEstablishmentRequestChan <- elem
+		return <-elem.DoneChan
 	case nasMessage.PayloadContainerTypeSMS:
 		return fmt.Errorf("PayloadContainerTypeSMS has not been implemented yet in UL NAS TRANSPORT")
 	case nasMessage.PayloadContainerTypeLPP:

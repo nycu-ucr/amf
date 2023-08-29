@@ -25,6 +25,11 @@ var (
 	amfStatusSubscriptionIDGenerator *idgenerator.IDGenerator = nil
 )
 
+const (
+	QueueSize    int   = 128
+	WorkerAmount int32 = 8
+)
+
 func init() {
 	AMF_Self().LadnPool = make(map[string]*LADN)
 	AMF_Self().EventSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
@@ -35,10 +40,10 @@ func init() {
 	AMF_Self().PlmnSupportList = make([]factory.PlmnSupportItem, 0, MaxNumOfPLMNs)
 	AMF_Self().NfService = make(map[models.ServiceName]models.NfService)
 	AMF_Self().NetworkName.Full = "free5GC"
-	AMF_Self().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, 16)
+	AMF_Self().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, QueueSize)
 	AMF_Self().PduSessionEstReqCounter = &PduSessionEstablishmentRequestCounter{
-		Limit:      16,
-		SignalChan: make(chan bool, 1),
+		Limit:      WorkerAmount,
+		SignalChan: make(chan bool, 10),
 		counter:    new(atomic.Int32),
 		lock:       new(sync.Mutex),
 	}
@@ -62,14 +67,19 @@ type PduSessionEstablishmentRequestCounter struct {
 }
 
 func (c *PduSessionEstablishmentRequestCounter) AddOne() int32 {
+	// c.lock.Lock()
+	// defer c.lock.Unlock()
 	c.counter.Add(1)
 	return c.counter.Load()
 }
 
 func (c *PduSessionEstablishmentRequestCounter) MinusOne() {
-	logger.ContextLog.Infoln("MinusOne")
+	// c.lock.Lock()
+	// defer c.lock.Unlock()
+	logger.ContextLog.Infof("Before MinusOne: %v", c.counter.Load())
 	if c.counter.Load() == c.Limit {
 		c.counter.Add(-1)
+		logger.ContextLog.Infof("MinusOne send signal")
 		c.SignalChan <- true
 	} else {
 		c.counter.Add(-1)

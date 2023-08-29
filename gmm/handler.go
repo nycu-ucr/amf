@@ -39,9 +39,9 @@ func PduSessionEstReqHandler() {
 	for elem := range amfSelf.PduSessionEstablishmentRequestChan {
 		counterValue = amfSelf.PduSessionEstReqCounter.AddOne()
 		elem.Ue.GmmLog.Infoln("Counter Value: ", counterValue)
-		go func() {
-			elem.DoneChan <- transport5GSMMessage(elem.Ue, elem.AnType, elem.UlNasTransport)
-		}()
+		go func(e context.PduSessionEstablishmentRequestElem) {
+			e.DoneChan <- transport5GSMMessage(e.Ue, e.AnType, e.UlNasTransport)
+		}(elem)
 		if counterValue == amfSelf.PduSessionEstReqCounter.Limit {
 			elem.Ue.GmmLog.Infoln("Counter up to limit, wait for signal")
 			<-amfSelf.PduSessionEstReqCounter.SignalChan

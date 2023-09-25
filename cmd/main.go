@@ -7,9 +7,9 @@ import (
 
 	"github.com/urfave/cli"
 
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/amf/pkg/factory"
-	"github.com/free5gc/amf/pkg/service"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/amf/pkg/factory"
+	"github.com/nycu-ucr/amf/pkg/service"
 	logger_util "github.com/free5gc/util/logger"
 	"github.com/free5gc/util/version"
 )

@@ -2,8 +2,8 @@
 package ngap
 
 import (
-	"github.com/free5gc/amf/internal/context"
-	ngap_message "github.com/free5gc/amf/internal/ngap/message"
+	"github.com/nycu-ucr/amf/internal/context"
+	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
 	"github.com/free5gc/ngap/ngapType"
 )
 

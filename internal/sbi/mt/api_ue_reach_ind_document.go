@@ -12,9 +12,9 @@ package mt
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/logger"
 )
 
 // EnableUeReachability - Namf_MT EnableUEReachability service Operation

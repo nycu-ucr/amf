@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/free5gc/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/logger"
 )
 
 // Timer can be used for retransmission, it will manage retry times automatically

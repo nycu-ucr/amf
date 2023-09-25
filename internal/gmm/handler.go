@@ -16,15 +16,15 @@ import (
 	"github.com/mohae/deepcopy"
 	"github.com/pkg/errors"
 
-	"github.com/free5gc/amf/internal/context"
-	gmm_common "github.com/free5gc/amf/internal/gmm/common"
-	gmm_message "github.com/free5gc/amf/internal/gmm/message"
-	"github.com/free5gc/amf/internal/logger"
-	ngap_message "github.com/free5gc/amf/internal/ngap/message"
-	"github.com/free5gc/amf/internal/sbi/consumer"
-	"github.com/free5gc/amf/internal/sbi/producer/callback"
-	"github.com/free5gc/amf/internal/util"
-	"github.com/free5gc/amf/pkg/factory"
+	"github.com/nycu-ucr/amf/internal/context"
+	gmm_common "github.com/nycu-ucr/amf/internal/gmm/common"
+	gmm_message "github.com/nycu-ucr/amf/internal/gmm/message"
+	"github.com/nycu-ucr/amf/internal/logger"
+	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
+	"github.com/nycu-ucr/amf/internal/sbi/consumer"
+	"github.com/nycu-ucr/amf/internal/sbi/producer/callback"
+	"github.com/nycu-ucr/amf/internal/util"
+	"github.com/nycu-ucr/amf/pkg/factory"
 	"github.com/free5gc/nas"
 	"github.com/free5gc/nas/nasConvert"
 	"github.com/free5gc/nas/nasMessage"
@@ -32,9 +32,9 @@ import (
 	"github.com/free5gc/nas/security"
 	"github.com/free5gc/ngap/ngapConvert"
 	"github.com/free5gc/ngap/ngapType"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/Nnrf_NFDiscovery"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
+	"github.com/nycu-ucr/openapi/models"
 	"github.com/free5gc/util/fsm"
 )
 
@@ -1585,7 +1585,7 @@ func HandleConfigurationUpdateComplete(ue *context.AmfUe,
 	// Stop timer T3555 in TS 24.501 Figure 5.4.4.1.1 in handler
 	ue.StopT3555()
 	// TODO: Send acknowledgment by Nudm_SMD_Info_Service to UDM in handler
-	//		import "github.com/free5gc/openapi/Nudm_SubscriberDataManagement" client.Info
+	//		import "github.com/nycu-ucr/openapi/Nudm_SubscriberDataManagement" client.Info
 
 	return nil
 }

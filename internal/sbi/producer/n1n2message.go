@@ -4,15 +4,15 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/free5gc/amf/internal/context"
-	gmm_message "github.com/free5gc/amf/internal/gmm/message"
-	"github.com/free5gc/amf/internal/logger"
-	ngap_message "github.com/free5gc/amf/internal/ngap/message"
-	"github.com/free5gc/amf/internal/sbi/producer/callback"
+	"github.com/nycu-ucr/amf/internal/context"
+	gmm_message "github.com/nycu-ucr/amf/internal/gmm/message"
+	"github.com/nycu-ucr/amf/internal/logger"
+	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
+	"github.com/nycu-ucr/amf/internal/sbi/producer/callback"
 	"github.com/free5gc/aper"
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/free5gc/ngap/ngapType"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 	"github.com/free5gc/util/httpwrapper"
 )
 

@@ -1,4 +1,4 @@
-module github.com/free5gc/amf
+module github.com/nycu-ucr/amf
 
 go 1.17
 
@@ -10,13 +10,13 @@ require (
 	github.com/free5gc/aper v1.0.5-0.20230614030933-c73735898582
 	github.com/free5gc/nas v1.1.2-0.20230828074825-175b09665828
 	github.com/free5gc/ngap v1.0.7-0.20230614061954-9c128114ab1f
-	github.com/free5gc/openapi v1.0.7-0.20230802173229-2b3ded4db293
 	github.com/free5gc/util v1.0.5-0.20230823103219-e511c4fd20ef
 	github.com/gin-contrib/cors v1.3.1
-	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	github.com/mitchellh/mapstructure v1.4.2
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
+	github.com/nycu-ucr/gin v0.0.0-20230307121200-573befe2dfbe
+	github.com/nycu-ucr/openapi l25gc+
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/smartystreets/goconvey v1.6.4

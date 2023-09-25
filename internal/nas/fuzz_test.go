@@ -8,14 +8,14 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	amf_nas "github.com/free5gc/amf/internal/nas"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	amf_nas "github.com/nycu-ucr/amf/internal/nas"
 	"github.com/free5gc/nas"
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/free5gc/nas/nasType"
 	"github.com/free5gc/ngap/ngapType"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func FuzzHandleNAS(f *testing.F) {

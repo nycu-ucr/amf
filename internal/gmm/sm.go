@@ -1,17 +1,17 @@
 package gmm
 
 import (
-	"github.com/free5gc/amf/internal/context"
-	gmm_common "github.com/free5gc/amf/internal/gmm/common"
-	gmm_message "github.com/free5gc/amf/internal/gmm/message"
-	"github.com/free5gc/amf/internal/logger"
-	ngap_message "github.com/free5gc/amf/internal/ngap/message"
-	"github.com/free5gc/amf/internal/sbi/consumer"
+	"github.com/nycu-ucr/amf/internal/context"
+	gmm_common "github.com/nycu-ucr/amf/internal/gmm/common"
+	gmm_message "github.com/nycu-ucr/amf/internal/gmm/message"
+	"github.com/nycu-ucr/amf/internal/logger"
+	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
+	"github.com/nycu-ucr/amf/internal/sbi/consumer"
 	"github.com/free5gc/nas"
 	"github.com/free5gc/nas/nasConvert"
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/free5gc/ngap/ngapType"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 	"github.com/free5gc/util/fsm"
 )
 

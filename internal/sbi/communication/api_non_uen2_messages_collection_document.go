@@ -12,9 +12,9 @@ package communication
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/logger"
 )
 
 // NonUeN2MessageTransfer - Namf_Communication Non UE N2 Message Transfer service Operation

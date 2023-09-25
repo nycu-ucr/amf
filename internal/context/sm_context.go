@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 type SmContext struct {

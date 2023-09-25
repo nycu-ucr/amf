@@ -13,7 +13,7 @@ import (
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/free5gc/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 // TS23502 4.2.3.3, 4.2.4.3, 4.3.2.2, 4.3.2.3, 4.3.3.2, 4.3.7

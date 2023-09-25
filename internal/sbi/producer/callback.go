@@ -15,7 +15,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/sbi/consumer"
 	"github.com/free5gc/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 func HandleSmContextStatusNotify(request *httpwrapper.Request) *httpwrapper.Response {

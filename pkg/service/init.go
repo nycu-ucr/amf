@@ -8,7 +8,7 @@ import (
 	"runtime/debug"
 	"syscall"
 
-	"github.com/gin-contrib/cors"
+	"github.com/nycu-ucr/cors"
 	"github.com/sirupsen/logrus"
 
 	amf_context "github.com/nycu-ucr/amf/internal/context"
@@ -26,8 +26,8 @@ import (
 	"github.com/nycu-ucr/amf/internal/sbi/producer/callback"
 	"github.com/nycu-ucr/amf/pkg/factory"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
-	logger_util "github.com/free5gc/util/logger"
+	"github.com/nycu-ucr/util/httpwrapper"
+	logger_util "github.com/nycu-ucr/util/logger"
 )
 
 type AmfApp struct {

@@ -18,7 +18,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/sbi/producer"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 // CreateSubscription - Namf_EventExposure Subscribe service Operation

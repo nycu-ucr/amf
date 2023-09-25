@@ -18,7 +18,7 @@ import (
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	logger_util "github.com/free5gc/util/logger"
+	logger_util "github.com/nycu-ucr/util/logger"
 )
 
 var HttpLog *logrus.Entry

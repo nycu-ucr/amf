@@ -12,7 +12,7 @@ import (
 	"github.com/free5gc/nas/nasMessage"
 	"github.com/free5gc/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/fsm"
+	"github.com/nycu-ucr/util/fsm"
 )
 
 func DeRegistered(state *fsm.State, event fsm.EventType, args fsm.ArgsType) {

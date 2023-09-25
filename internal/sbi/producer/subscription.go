@@ -7,7 +7,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 // TS 29.518 5.2.2.5.1

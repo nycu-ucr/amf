@@ -17,7 +17,7 @@ import (
 	"github.com/free5gc/ngap/ngapConvert"
 	"github.com/free5gc/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 	"encoding/hex"
 	smf_handler "free5gc/src/smf/handler"
 	"free5gc/src/smf/pdusession"

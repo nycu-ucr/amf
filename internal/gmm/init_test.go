@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/free5gc/util/fsm"
+	"github.com/nycu-ucr/util/fsm"
 )
 
 func TestGmmFSM(t *testing.T) {

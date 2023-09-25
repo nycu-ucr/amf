@@ -6,7 +6,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 func HandleProvideLocationInfoRequest(request *httpwrapper.Request) *httpwrapper.Response {

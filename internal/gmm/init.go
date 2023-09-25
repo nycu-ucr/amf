@@ -3,7 +3,7 @@ package gmm
 import (
 	"github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
-	"github.com/free5gc/util/fsm"
+	"github.com/nycu-ucr/util/fsm"
 )
 
 const (

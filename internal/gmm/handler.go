@@ -35,7 +35,7 @@ import (
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/fsm"
+	"github.com/nycu-ucr/util/fsm"
 )
 
 const psiArraySize = 16

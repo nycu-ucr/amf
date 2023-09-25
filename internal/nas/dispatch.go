@@ -9,7 +9,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/free5gc/nas"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/fsm"
+	"github.com/nycu-ucr/util/fsm"
 )
 
 func Dispatch(ue *context.AmfUe, accessType models.AccessType, procedureCode int64, msg *nas.Message) error {

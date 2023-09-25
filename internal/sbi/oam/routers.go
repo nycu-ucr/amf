@@ -3,12 +3,12 @@ package oam
 import (
 	"net/http"
 
-	"github.com/gin-contrib/cors"
+	"github.com/nycu-ucr/cors"
 	"github.com/nycu-ucr/gin"
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	logger_util "github.com/free5gc/util/logger"
+	logger_util "github.com/nycu-ucr/util/logger"
 )
 
 // Route is the information for every URI.

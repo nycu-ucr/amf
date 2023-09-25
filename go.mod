@@ -10,15 +10,15 @@ require (
 	github.com/free5gc/aper v1.0.5-0.20230614030933-c73735898582
 	github.com/free5gc/nas v1.1.2-0.20230828074825-175b09665828
 	github.com/free5gc/ngap v1.0.7-0.20230614061954-9c128114ab1f
-	github.com/free5gc/util v1.0.5-0.20230823103219-e511c4fd20ef
-	github.com/gin-contrib/cors v1.3.1
 	github.com/google/uuid v1.3.0
 	github.com/mitchellh/mapstructure v1.4.2
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826
+	github.com/nycu-ucr/cors v0.0.0-20221108151123-ce0e42c254d8
 	github.com/nycu-ucr/gin v0.0.0-20230307121200-573befe2dfbe
-	github.com/nycu-ucr/openapi l25gc+
+	github.com/nycu-ucr/openapi v0.0.0-20230925081142-aac51cb39b66
+	github.com/nycu-ucr/util v0.0.0-20230925114436-4b1f89e8d676
 	github.com/pkg/errors v0.9.1
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.9.0
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/stretchr/testify v1.8.1
 	github.com/urfave/cli v1.22.5
@@ -31,7 +31,7 @@ require (
 	github.com/bytedance/sonic v1.8.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
-	github.com/gin-contrib/sse v0.1.0 // indirect
+	github.com/free5gc/openapi v1.0.6 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.11.2 // indirect
@@ -47,6 +47,10 @@ require (
 	github.com/mattn/go-isatty v0.0.17 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/nycu-ucr/gonet v0.0.0-20230321050809-f6bf07ae0d7e // indirect
+	github.com/nycu-ucr/net v0.0.0-20230321075841-be2b9a37bf1d // indirect
+	github.com/nycu-ucr/onvmpoller v0.0.0-20230222141454-8145d720d05c // indirect
+	github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/russross/blackfriday/v2 v2.0.1 // indirect

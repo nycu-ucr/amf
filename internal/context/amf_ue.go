@@ -19,9 +19,9 @@ import (
 	"github.com/free5gc/nas/security"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/models"
-	"github.com/free5gc/util/fsm"
-	"github.com/free5gc/util/idgenerator"
-	"github.com/free5gc/util/ueauth"
+	"github.com/nycu-ucr/util/fsm"
+	"github.com/nycu-ucr/util/idgenerator"
+	"github.com/nycu-ucr/util/ueauth"
 )
 
 type OnGoingProcedure string

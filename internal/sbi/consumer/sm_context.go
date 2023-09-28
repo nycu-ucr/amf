@@ -13,7 +13,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/internal/util"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
 	"github.com/nycu-ucr/openapi/Nsmf_PDUSession"

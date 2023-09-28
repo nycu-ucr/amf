@@ -2,7 +2,7 @@ package producer
 
 import (
 	"fmt"
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"runtime/debug"
 	"strconv"
 
@@ -13,7 +13,7 @@ import (
 	amf_nas "github.com/nycu-ucr/amf/internal/nas"
 	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
 	"github.com/nycu-ucr/amf/internal/sbi/consumer"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 	"github.com/nycu-ucr/util/httpwrapper"
 )

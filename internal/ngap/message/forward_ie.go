@@ -5,8 +5,8 @@ import (
 
 	"github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
-	"github.com/free5gc/ngap/ngapConvert"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap/ngapConvert"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )
 

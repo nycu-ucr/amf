@@ -9,9 +9,9 @@ import (
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
 	"github.com/free5gc/aper"
-	"github.com/free5gc/ngap"
-	"github.com/free5gc/ngap/ngapConvert"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap"
+	"github.com/nycu-ucr/ngap/ngapConvert"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )
 

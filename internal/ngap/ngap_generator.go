@@ -15,7 +15,7 @@ import (
 	"strings"
 
 	"github.com/free5gc/aper"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap/ngapType"
 )
 
 type messageDirection int

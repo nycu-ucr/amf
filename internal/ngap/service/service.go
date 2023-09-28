@@ -12,7 +12,7 @@ import (
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	"github.com/free5gc/ngap"
+	"github.com/nycu-ucr/ngap"
 )
 
 type NGAPHandler struct {

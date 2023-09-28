@@ -5,7 +5,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/logger"
 	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
 	"github.com/nycu-ucr/amf/internal/sbi/consumer"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )
 

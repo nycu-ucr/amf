@@ -11,7 +11,7 @@ import (
 
 	amf_context "github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
-	"github.com/free5gc/nas/nasType"
+	"github.com/nycu-ucr/nas/nasType"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Nausf_UEAuthentication"
 	"github.com/nycu-ucr/openapi/models"

@@ -7,7 +7,7 @@ import (
 
 	amf_context "github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
-	"github.com/free5gc/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/Namf_Communication"
 	"github.com/nycu-ucr/openapi/models"

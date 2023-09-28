@@ -4,7 +4,7 @@ package ngap
 import (
 	"github.com/nycu-ucr/amf/internal/context"
 	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap/ngapType"
 )
 
 func dispatchMain(ran *context.AmfRan, message *ngapType.NGAPPDU) {

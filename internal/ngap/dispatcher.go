@@ -7,7 +7,7 @@ import (
 
 	"github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
-	"github.com/free5gc/ngap"
+	"github.com/nycu-ucr/ngap"
 )
 
 func Dispatch(conn net.Conn, msg []byte) {

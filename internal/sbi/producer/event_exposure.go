@@ -1,7 +1,7 @@
 package producer
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"strconv"
 	"time"
 

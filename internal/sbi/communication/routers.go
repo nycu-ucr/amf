@@ -10,7 +10,7 @@
 package communication
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"strings"
 
 	"github.com/nycu-ucr/gin"

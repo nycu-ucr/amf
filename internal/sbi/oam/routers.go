@@ -1,7 +1,7 @@
 package oam
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
 	"github.com/nycu-ucr/cors"
 	"github.com/nycu-ucr/gin"

@@ -14,9 +14,9 @@ import (
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/nasType"
-	"github.com/free5gc/nas/security"
+	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasType"
+	"github.com/nycu-ucr/nas/security"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/models"
 	"github.com/nycu-ucr/util/fsm"

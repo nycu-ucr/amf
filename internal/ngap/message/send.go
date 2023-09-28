@@ -5,7 +5,7 @@ import (
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/internal/sbi/producer/callback"
 	"github.com/free5gc/aper"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 )
 

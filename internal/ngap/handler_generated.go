@@ -5,8 +5,8 @@ import (
 	"github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/logger"
 	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
-	"github.com/free5gc/ngap"
-	"github.com/free5gc/ngap/ngapType"
+	"github.com/nycu-ucr/ngap"
+	"github.com/nycu-ucr/ngap/ngapType"
 )
 
 func handlerAMFConfigurationUpdate(ran *context.AmfRan, initiatingMessage *ngapType.InitiatingMessage) {

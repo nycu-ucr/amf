@@ -11,7 +11,7 @@ package communication
 
 import (
 	"fmt"
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"strings"
 
 	"github.com/nycu-ucr/gin"

@@ -16,8 +16,8 @@ require (
 	github.com/nycu-ucr/gonet v0.0.0-20230328095129-6e9ca74b90b5
 	github.com/nycu-ucr/nas v0.0.0-20230928071136-9768d1c7fcb8
 	github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94
-	github.com/nycu-ucr/openapi v0.0.0-20230928062843-d58e71be263c
-	github.com/nycu-ucr/util v0.0.0-20230927073758-94417e22c74e
+	github.com/nycu-ucr/openapi v0.0.0-20230928123234-3c11228b5e01
+	github.com/nycu-ucr/util v0.0.0-20230928120650-6ed674c090b3
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/smartystreets/goconvey v1.6.4

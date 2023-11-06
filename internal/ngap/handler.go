@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"strconv"
+	"github.com/free5gc/aper"
 
 	"github.com/nycu-ucr/amf/internal/context"
 	gmm_common "github.com/nycu-ucr/amf/internal/gmm/common"
@@ -13,7 +14,6 @@ import (
 	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
 	"github.com/nycu-ucr/amf/internal/sbi/consumer"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	"github.com/free5gc/aper"
 	"github.com/nycu-ucr/nas"
 	"github.com/nycu-ucr/nas/nasMessage"
 	libngap "github.com/nycu-ucr/ngap"
@@ -662,6 +662,7 @@ func handlePDUSessionResourceSetupResponseMain(ran *context.AmfRan,
 	if criticalityDiagnostics != nil {
 		printCriticalityDiagnostics(ran, criticalityDiagnostics)
 	}
+	context.GetSelf().PduSessionEstReqCounter.MinusOne()
 }
 
 func handlePDUSessionResourceModifyResponseMain(ran *context.AmfRan,

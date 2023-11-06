@@ -40,6 +40,23 @@ import (
 
 const psiArraySize = 16
 
+func PduSessionEstReqHandler() {
+	amfSelf := context.GetSelf()
+	var counterValue int32
+
+	for elem := range amfSelf.PduSessionEstablishmentRequestChan {
+		counterValue = amfSelf.PduSessionEstReqCounter.AddOne()
+		elem.Ue.GmmLog.Infoln("Counter Value: ", counterValue)
+		go func(e context.PduSessionEstablishmentRequestElem) {
+			e.DoneChan <- transport5GSMMessage(e.Ue, e.AnType, e.UlNasTransport)
+		}(elem)
+		if counterValue == amfSelf.PduSessionEstReqCounter.Limit {
+			elem.Ue.GmmLog.Infoln("Counter up to limit, wait for signal")
+			<-amfSelf.PduSessionEstReqCounter.SignalChan
+		}
+	}
+}
+
 func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 	ulNasTransport *nasMessage.ULNASTransport,
 ) error {
@@ -52,7 +69,14 @@ func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 	switch ulNasTransport.GetPayloadContainerType() {
 	// TS 24.501 5.4.5.2.3 case a)
 	case nasMessage.PayloadContainerTypeN1SMInfo:
-		return transport5GSMMessage(ue, anType, ulNasTransport)
+		elem := context.PduSessionEstablishmentRequestElem{
+			Ue:             ue,
+			AnType:         anType,
+			UlNasTransport: ulNasTransport,
+			DoneChan:       make(chan error),
+		}
+		context.GetSelf().PduSessionEstablishmentRequestChan <- elem
+		return <-elem.DoneChan
 	case nasMessage.PayloadContainerTypeSMS:
 		return fmt.Errorf("PayloadContainerTypeSMS has not been implemented yet in UL NAS TRANSPORT")
 	case nasMessage.PayloadContainerTypeLPP:

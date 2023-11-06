@@ -9,8 +9,10 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"sync/atomic"
 
 	"github.com/google/uuid"
+	"github.com/nycu-ucr/nas/nasMessage"
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
@@ -28,6 +30,11 @@ var (
 	amfStatusSubscriptionIDGenerator *idgenerator.IDGenerator = nil
 )
 
+const (
+	QueueSize    int   = 128
+	WorkerAmount int32 = 8
+)
+
 func init() {
 	GetSelf().LadnPool = make(map[string]factory.Ladn)
 	GetSelf().EventSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
@@ -38,9 +45,46 @@ func init() {
 	GetSelf().PlmnSupportList = make([]factory.PlmnSupportItem, 0, MaxNumOfPLMNs)
 	GetSelf().NfService = make(map[models.ServiceName]models.NfService)
 	GetSelf().NetworkName.Full = "free5GC"
+	GetSelf().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, QueueSize)
+	GetSelf().PduSessionEstReqCounter = &PduSessionEstablishmentRequestCounter{
+		Limit:      WorkerAmount,
+		SignalChan: make(chan bool, 10),
+		counter:    new(atomic.Int32),
+		lock:       new(sync.Mutex),
+	}
 	tmsiGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfStatusSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfUeNGAPIDGenerator = idgenerator.NewGenerator(1, MaxValueOfAmfUeNgapId)
+}
+
+type PduSessionEstablishmentRequestElem struct {
+	Ue             *AmfUe
+	AnType         models.AccessType
+	UlNasTransport *nasMessage.ULNASTransport
+	DoneChan       chan error
+}
+
+type PduSessionEstablishmentRequestCounter struct {
+	Limit      int32
+	SignalChan chan bool
+	counter    *atomic.Int32
+	lock       *sync.Mutex
+}
+
+func (c *PduSessionEstablishmentRequestCounter) AddOne() int32 {
+	c.counter.Add(1)
+	return c.counter.Load()
+}
+
+func (c *PduSessionEstablishmentRequestCounter) MinusOne() {
+	logger.CtxLog.Infof("Before MinusOne: %v", c.counter.Load())
+	if c.counter.Load() == c.Limit {
+		c.counter.Add(-1)
+		logger.CtxLog.Infof("MinusOne send signal")
+		c.SignalChan <- true
+	} else {
+		c.counter.Add(-1)
+	}
 }
 
 type AMFContext struct {
@@ -83,6 +127,8 @@ type AMFContext struct {
 	T3570Cfg factory.TimerValue
 	T3555Cfg factory.TimerValue
 	Locality string
+	PduSessionEstablishmentRequestChan chan PduSessionEstablishmentRequestElem
+	PduSessionEstReqCounter            *PduSessionEstablishmentRequestCounter
 }
 
 type AMFContextEventSubscription struct {

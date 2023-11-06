@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"runtime/debug"
 	"syscall"
+	"github.com/nycu-ucr/amf/internal/gmm"
 
 	"github.com/nycu-ucr/cors"
 	"github.com/sirupsen/logrus"
@@ -180,6 +181,8 @@ func (a *AmfApp) Start(tlsKeyLogPath string) {
 	if err != nil {
 		logger.InitLog.Warnf("Initialize HTTP server: %+v", err)
 	}
+
+	go gmm.PduSessionEstReqHandler()
 
 	serverScheme := factory.AmfConfig.GetSbiScheme()
 	if serverScheme == "http" {

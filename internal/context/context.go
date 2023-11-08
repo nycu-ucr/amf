@@ -13,6 +13,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/ngap/ngapType"
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
@@ -31,8 +32,10 @@ var (
 )
 
 const (
-	QueueSize    int   = 128
-	WorkerAmount int32 = 8
+	QueueSize_pdu    int   = 128
+	WorkerAmount_pdu int32 = 8
+	QueueSize_handover    int   = 128
+	WorkerAmount_handover int32 = 8
 )
 
 func init() {
@@ -45,9 +48,16 @@ func init() {
 	GetSelf().PlmnSupportList = make([]factory.PlmnSupportItem, 0, MaxNumOfPLMNs)
 	GetSelf().NfService = make(map[models.ServiceName]models.NfService)
 	GetSelf().NetworkName.Full = "free5GC"
-	GetSelf().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, QueueSize)
+	GetSelf().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, QueueSize_pdu)
 	GetSelf().PduSessionEstReqCounter = &PduSessionEstablishmentRequestCounter{
-		Limit:      WorkerAmount,
+		Limit:      WorkerAmount_pdu,
+		SignalChan: make(chan bool, 10),
+		counter:    new(atomic.Int32),
+		lock:       new(sync.Mutex),
+	}
+	GetSelf().N2HandoverRequiredChan = make(chan N2HandoverRequiredElem, QueueSize_handover)
+	GetSelf().N2HandoverReqCounter = &PduSessionEstablishmentRequestCounter{
+		Limit:      WorkerAmount_handover,
 		SignalChan: make(chan bool, 10),
 		counter:    new(atomic.Int32),
 		lock:       new(sync.Mutex),
@@ -70,6 +80,17 @@ type PduSessionEstablishmentRequestCounter struct {
 	counter    *atomic.Int32
 	lock       *sync.Mutex
 }
+
+type N2HandoverRequiredElem struct {
+	SourceUe	*RanUe
+	TargetRan	*AmfRan
+	Cause		ngapType.Cause
+	PduSessionReqList	ngapType.PDUSessionResourceSetupListHOReq
+	SourceToTargetTransparentContainer	ngapType.SourceToTargetTransparentContainer
+	Nsci		bool
+	//DoneChan	chan error
+}
+
 
 func (c *PduSessionEstablishmentRequestCounter) AddOne() int32 {
 	c.counter.Add(1)
@@ -129,6 +150,8 @@ type AMFContext struct {
 	Locality string
 	PduSessionEstablishmentRequestChan chan PduSessionEstablishmentRequestElem
 	PduSessionEstReqCounter            *PduSessionEstablishmentRequestCounter
+	N2HandoverRequiredChan chan N2HandoverRequiredElem
+	N2HandoverReqCounter            *PduSessionEstablishmentRequestCounter
 }
 
 type AMFContextEventSubscription struct {

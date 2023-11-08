@@ -3424,6 +3424,7 @@ func handlerHandoverRequired(ran *context.AmfRan, initiatingMessage *ngapType.In
 	//	targetID *ngapType.TargetID,
 	//	pDUSessionResourceListHORqd *ngapType.PDUSessionResourceListHORqd,
 	//	sourceToTargetTransparentContainer *ngapType.SourceToTargetTransparentContainer) {
+	
 	handleHandoverRequiredMain(ran, ranUe, handoverType, cause /* may be nil */, targetID, pDUSessionResourceListHORqd, sourceToTargetTransparentContainer)
 }
 

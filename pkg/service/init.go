@@ -183,7 +183,7 @@ func (a *AmfApp) Start(tlsKeyLogPath string) {
 	}
 
 	go gmm.PduSessionEstReqHandler()
-
+	go ngap.N2HandoverReqHandler()
 	serverScheme := factory.AmfConfig.GetSbiScheme()
 	if serverScheme == "http" {
 		err = server.ListenAndServe()

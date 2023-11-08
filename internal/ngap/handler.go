@@ -22,6 +22,24 @@ import (
 	"github.com/nycu-ucr/openapi/models"
 )
 
+func N2HandoverReqHandler() {
+	amfSelf := context.GetSelf()
+	var counterValue int32
+
+	for elem := range amfSelf.N2HandoverRequiredChan {
+		counterValue = amfSelf.N2HandoverReqCounter.AddOne()
+		elem.SourceUe.Log.Infoln("Counter Value: ", counterValue)
+		go func(e context.N2HandoverRequiredElem) {
+			ngap_message.SendHandoverRequest(e.SourceUe, e.TargetRan, e.Cause, e.PduSessionReqList,
+				e.SourceToTargetTransparentContainer, e.Nsci)
+		}(elem)
+		if counterValue == amfSelf.N2HandoverReqCounter.Limit {
+			elem.SourceUe.Log.Infoln("Counter up to limit, wait for signal")
+			<-amfSelf.N2HandoverReqCounter.SignalChan
+		}
+	}
+}
+
 func handleNGSetupRequestMain(ran *context.AmfRan,
 	globalRANNodeID *ngapType.GlobalRANNodeID,
 	rANNodeName *ngapType.RANNodeName,
@@ -1220,7 +1238,7 @@ func handleHandoverNotifyMain(ran *context.AmfRan,
 		ngap_message.SendUEContextReleaseCommand(sourceUe, context.UeContextReleaseHandover, ngapType.CausePresentNas,
 			ngapType.CauseNasPresentNormalRelease)
 	}
-
+	context.GetSelf().N2HandoverReqCounter.MinusOne()
 	// TODO: The UE initiates Mobility Registration Update procedure as described in clause 4.2.2.2.2.
 }
 
@@ -1635,8 +1653,18 @@ func handleHandoverRequiredMain(ran *context.AmfRan,
 				},
 			}
 		}
-		ngap_message.SendHandoverRequest(sourceUe, targetRan, *cause, pduSessionReqList,
-			*sourceToTargetTransparentContainer, false)
+		elem := context.N2HandoverRequiredElem{
+			SourceUe: sourceUe,
+			TargetRan: targetRan,
+			Cause: *cause,
+			PduSessionReqList: pduSessionReqList,
+			SourceToTargetTransparentContainer: *sourceToTargetTransparentContainer,
+			Nsci: false,
+			// DoneChan: make(chan error),
+		}
+		context.GetSelf().N2HandoverRequiredChan <- elem
+		// ngap_message.SendHandoverRequest(sourceUe, targetRan, *cause, pduSessionReqList,
+		// 	*sourceToTargetTransparentContainer, false)
 	}
 }
 

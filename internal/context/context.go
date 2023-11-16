@@ -54,6 +54,8 @@ func init() {
 		SignalChan: make(chan bool, 10),
 		counter:    new(atomic.Int32),
 		lock:       new(sync.Mutex),
+		Lock:       new(sync.Mutex),
+		Ues:		make([]*AmfUe, 0),
 	}
 	GetSelf().N2HandoverRequiredChan = make(chan N2HandoverRequiredElem, QueueSize_handover)
 	GetSelf().N2HandoverReqCounter = &PduSessionEstablishmentRequestCounter{
@@ -61,6 +63,8 @@ func init() {
 		SignalChan: make(chan bool, 10),
 		counter:    new(atomic.Int32),
 		lock:       new(sync.Mutex),
+		Lock:       new(sync.Mutex),
+		Ues:		make([]*AmfUe, 0),
 	}
 	tmsiGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfStatusSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
@@ -79,6 +83,8 @@ type PduSessionEstablishmentRequestCounter struct {
 	SignalChan chan bool
 	counter    *atomic.Int32
 	lock       *sync.Mutex
+	Lock       *sync.Mutex
+	Ues        []*AmfUe
 }
 
 type N2HandoverRequiredElem struct {

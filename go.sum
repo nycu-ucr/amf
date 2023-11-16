@@ -193,6 +193,8 @@ github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 h1:RWengNIwukTxcDr9
 github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826/go.mod h1:TaXosZuwdSHYgviHp1DAtfrULt5eUgsSMsZf+YrPgl8=
 github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32 h1:W6apQkHrMkS0Muv8G/TipAy/FJl/rCYT0+EuS8+Z0z4=
 github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uYLpLIr5fm8diHn0JbqRycJi6w0Ms=
+github.com/niemeyer/golang v0.0.0-20110826170342-f8c0f811cb19 h1:HDsKR+rtTZD+ey3J3U+UWJLko6XJkNWaRp0+yn1u0FQ=
+github.com/niemeyer/golang v0.0.0-20110826170342-f8c0f811cb19/go.mod h1:vOsSoNMQygvjuK93uIN1lif16OAgfRDlVu7hHS96lPg=
 github.com/nycu-ucr/cors v0.0.0-20221108151123-ce0e42c254d8 h1:F7RqJ/X5TPAoW2Sw/WSP9e76vidP60CEV8Upegu8OaU=
 github.com/nycu-ucr/cors v0.0.0-20221108151123-ce0e42c254d8/go.mod h1:VHysIAXMHmBn5yeHiUkJ2Pp0+jnli0nSzpc8YqYP9/I=
 github.com/nycu-ucr/gin v0.0.0-20230307121200-573befe2dfbe h1:8wOKifyBdRKW0vdMgcDy7yc6yvVj/lU90AYSZT3SN3E=

@@ -75,6 +75,7 @@ func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 			UlNasTransport: ulNasTransport,
 			DoneChan:       make(chan error),
 		}
+		context.GetSelf().PduSessionEstReqCounter.Ues = append(context.GetSelf().PduSessionEstReqCounter.Ues, ue)
 		context.GetSelf().PduSessionEstablishmentRequestChan <- elem
 		return <-elem.DoneChan
 	case nasMessage.PayloadContainerTypeSMS:

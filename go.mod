@@ -47,6 +47,7 @@ require (
 	github.com/mattn/go-isatty v0.0.17 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/niemeyer/golang v0.0.0-20110826170342-f8c0f811cb19 // indirect
 	github.com/nycu-ucr/gock v0.0.0-20230928062355-60066588379a // indirect
 	github.com/nycu-ucr/net v0.0.0-20231031091433-d01d59c308c0 // indirect
 	github.com/nycu-ucr/oauth2 v0.0.0-20230927074609-e939447bd9b2 // indirect

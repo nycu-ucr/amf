@@ -1,6 +1,7 @@
 package context
 
 import (
+	"os"
 	"fmt"
 	"math"
 	"net"
@@ -10,6 +11,7 @@ import (
 	"sync"
 	"time"
 	"sync/atomic"
+	"runtime/metrics"
 
 	"github.com/google/uuid"
 	"github.com/nycu-ucr/nas/nasMessage"
@@ -33,10 +35,77 @@ var (
 
 const (
 	QueueSize_pdu    int   = 128
-	WorkerAmount_pdu int32 = 8
+	WorkerAmount_pdu int32 = 32
 	QueueSize_handover    int   = 128
 	WorkerAmount_handover int32 = 8
 )
+
+func monitor(){
+	file, _ := os.OpenFile("latancies.txt", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o666)
+	sample := make([]metrics.Sample, 2)
+	sample[0].Name = "/sched/latencies:seconds"
+	sample[1].Name = "/sched/goroutines:goroutines"
+	metrics.Read(sample)
+	old_histogram := make([]uint64, 1000)
+
+	for i:=0; i<1000; i++{
+		old_histogram[i] = uint64(0)
+	}
+
+	for true{
+		metrics.Read(sample)
+		data := fmt.Sprintf("%d  %.10f\n", sample[1].Value.Uint64(), SampleFromBucket(sample[0].Value.Float64Histogram(), old_histogram))
+		file.WriteString(data)
+		time.Sleep(100*time.Millisecond)
+	}
+}
+func Allzero(h *metrics.Float64Histogram) int {
+	for _, count := range h.Counts{
+		if count > 0 {
+			return 0
+		}
+	}
+	return 1
+}
+
+func medianBucket(h *metrics.Float64Histogram) float64 {
+	total := uint64(0)
+	for _, count := range h.Counts {
+		total += count
+	}
+	thresh := total
+	total = 0
+	for i, count := range h.Counts {
+		total += count
+		if total >= thresh {
+			if i == 0{
+				return float64(0.0)
+			}				
+			return h.Buckets[i]*1000
+		}
+	}
+	panic("should not happen")
+}
+
+func SampleFromBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
+	total := uint64(0)
+	for i, count := range h.Counts {
+		total = total + count - h_old[i]
+	}
+	thresh := total
+	total = 0
+	for i, count := range h.Counts {
+		total += count - h_old[i]
+		h_old[i]=count
+		if total >= thresh {
+			if i == 0{
+				return float64(0.0)
+			}
+			return h.Buckets[i]*1000
+		}
+	}
+	panic("should not happen")
+}
 
 func init() {
 	GetSelf().LadnPool = make(map[string]factory.Ladn)
@@ -69,6 +138,7 @@ func init() {
 	tmsiGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfStatusSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfUeNGAPIDGenerator = idgenerator.NewGenerator(1, MaxValueOfAmfUeNgapId)
+	go monitor()
 }
 
 type PduSessionEstablishmentRequestElem struct {

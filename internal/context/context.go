@@ -31,13 +31,14 @@ var (
 	tmsiGenerator                    *idgenerator.IDGenerator = nil
 	amfUeNGAPIDGenerator             *idgenerator.IDGenerator = nil
 	amfStatusSubscriptionIDGenerator *idgenerator.IDGenerator = nil
+	WorkerAmount_pdu int32 = 32
 )
 
 const (
 	QueueSize_pdu    int   = 128
-	WorkerAmount_pdu int32 = 32
 	QueueSize_handover    int   = 128
 	WorkerAmount_handover int32 = 8
+	threshold float64 = 0.01
 )
 
 func monitor(){
@@ -54,40 +55,52 @@ func monitor(){
 
 	for true{
 		metrics.Read(sample)
-		data := fmt.Sprintf("%d  %.10f\n", sample[1].Value.Uint64(), SampleFromBucket(sample[0].Value.Float64Histogram(), old_histogram))
+		data := fmt.Sprintf("%d  %.5f  %.5f  %.5f %d\n", len(GetSelf().PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), medianBucket(sample[0].Value.Float64Histogram(), old_histogram), MaxBucket(sample[0].Value.Float64Histogram(), old_histogram), WorkerAmount_pdu)
+		
 		file.WriteString(data)
+		amfself := GetSelf()
+		//add or remove worker if the load wasn't optimized
+		if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)>=float64(threshold) && WorkerAmount_pdu>1 && amfself.PduSessionEstReqCounter.counter.Load()!=0 {
+			WorkerAmount_pdu -= 1
+			amfself.PduSessionEstReqCounter.Limit -= 1
+		}
+		if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)<float64(threshold) && len(amfself.PduSessionEstablishmentRequestChan)!=0{
+			WorkerAmount_pdu += 1
+			amfself.PduSessionEstReqCounter.Limit += 1
+			//amfself.PduSessionEstReqCounter.SignalChan <- true
+		}
+		update_old_histogram(sample[0].Value.Float64Histogram(), old_histogram)
 		time.Sleep(100*time.Millisecond)
 	}
 }
-func Allzero(h *metrics.Float64Histogram) int {
-	for _, count := range h.Counts{
-		if count > 0 {
-			return 0
-		}
+
+func update_old_histogram(h *metrics.Float64Histogram, h_old []uint64) {
+	for i, count := range h.Counts {
+		h_old[i]=count
 	}
-	return 1
+	return
 }
 
-func medianBucket(h *metrics.Float64Histogram) float64 {
+func medianBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
 	total := uint64(0)
-	for _, count := range h.Counts {
-		total += count
+	for i, count := range h.Counts {
+		total = total + count - h_old[i]
 	}
-	thresh := total
+	thresh := total / 2
 	total = 0
 	for i, count := range h.Counts {
-		total += count
+		total += count - h_old[i]
 		if total >= thresh {
 			if i == 0{
 				return float64(0.0)
-			}				
+			}
 			return h.Buckets[i]*1000
 		}
 	}
 	panic("should not happen")
 }
 
-func SampleFromBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
+func MaxBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
 	total := uint64(0)
 	for i, count := range h.Counts {
 		total = total + count - h_old[i]
@@ -96,7 +109,6 @@ func SampleFromBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
 	total = 0
 	for i, count := range h.Counts {
 		total += count - h_old[i]
-		h_old[i]=count
 		if total >= thresh {
 			if i == 0{
 				return float64(0.0)
@@ -104,6 +116,27 @@ func SampleFromBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
 			return h.Buckets[i]*1000
 		}
 	}
+	panic("should not happen")
+}
+
+func AverageBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
+	total := uint64(0)
+	for i, count := range h.Counts {
+		total = total + count - h_old[i]
+	}
+	if total == 0{
+		return float64(0.0)
+	}
+	occurance := uint64(0)
+	sum := float64(0.0)
+	for i, count := range h.Counts {
+		occurance = count - h_old[i]
+		if i == 0 {
+			continue
+		}
+		sum += h.Buckets[i] * float64(occurance) * 1000
+	}
+	return sum / float64(total)
 	panic("should not happen")
 }
 
@@ -118,6 +151,7 @@ func init() {
 	GetSelf().NfService = make(map[models.ServiceName]models.NfService)
 	GetSelf().NetworkName.Full = "free5GC"
 	GetSelf().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, QueueSize_pdu)
+	GetSelf().WorkerAmount_pdu = WorkerAmount_pdu
 	GetSelf().PduSessionEstReqCounter = &PduSessionEstablishmentRequestCounter{
 		Limit:      WorkerAmount_pdu,
 		SignalChan: make(chan bool, 10),
@@ -228,6 +262,7 @@ type AMFContext struct {
 	PduSessionEstReqCounter            *PduSessionEstablishmentRequestCounter
 	N2HandoverRequiredChan chan N2HandoverRequiredElem
 	N2HandoverReqCounter            *PduSessionEstablishmentRequestCounter
+	WorkerAmount_pdu int32
 }
 
 type AMFContextEventSubscription struct {

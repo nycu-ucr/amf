@@ -31,7 +31,7 @@ var (
 	tmsiGenerator                    *idgenerator.IDGenerator = nil
 	amfUeNGAPIDGenerator             *idgenerator.IDGenerator = nil
 	amfStatusSubscriptionIDGenerator *idgenerator.IDGenerator = nil
-	WorkerAmount_pdu int32 = 32
+	WorkerAmount_pdu int32 = 4
 )
 
 const (
@@ -52,25 +52,40 @@ func monitor(){
 	for i:=0; i<1000; i++{
 		old_histogram[i] = uint64(0)
 	}
-
+	amfself := GetSelf()
+	cnt := 0
 	for true{
 		metrics.Read(sample)
-		data := fmt.Sprintf("%d  %.5f  %.5f  %.5f %d\n", len(GetSelf().PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), medianBucket(sample[0].Value.Float64Histogram(), old_histogram), MaxBucket(sample[0].Value.Float64Histogram(), old_histogram), WorkerAmount_pdu)
-		
+		data := fmt.Sprintf("%d  %.5f  %.5f  %.5f %d\n", len(amfself.PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), medianBucket(sample[0].Value.Float64Histogram(), old_histogram), MaxBucket(sample[0].Value.Float64Histogram(), old_histogram), WorkerAmount_pdu)
+
 		file.WriteString(data)
-		amfself := GetSelf()
 		//add or remove worker if the load wasn't optimized
-		if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)>=float64(threshold) && WorkerAmount_pdu>1 && amfself.PduSessionEstReqCounter.counter.Load()!=0 {
-			WorkerAmount_pdu -= 1
-			amfself.PduSessionEstReqCounter.Limit -= 1
-		}
-		if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)<float64(threshold) && len(amfself.PduSessionEstablishmentRequestChan)!=0{
-			WorkerAmount_pdu += 1
-			amfself.PduSessionEstReqCounter.Limit += 1
-			//amfself.PduSessionEstReqCounter.SignalChan <- true
+		if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)>=float64(threshold) && WorkerAmount_pdu>1 && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)) {
+			if cnt >= 0{
+				cnt += 1
+			}else{
+				cnt = 0
+			}
+			if cnt > 1{
+				WorkerAmount_pdu -= 1
+				amfself.PduSessionEstReqCounter.Limit -= 1
+				cnt = 0
+			}
+		}else if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)<float64(threshold) && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)){
+			if cnt <= 0{
+				cnt -= 1
+			}else{
+				cnt = 0
+			}
+			if cnt < -1{
+				WorkerAmount_pdu += 1
+				amfself.PduSessionEstReqCounter.Limit += 1
+				cnt = 0
+			}
+			amfself.PduSessionEstReqCounter.SignalChan <- true
 		}
 		update_old_histogram(sample[0].Value.Float64Histogram(), old_histogram)
-		time.Sleep(100*time.Millisecond)
+		time.Sleep(500*time.Millisecond)
 	}
 }
 

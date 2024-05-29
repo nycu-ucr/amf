@@ -53,35 +53,20 @@ func monitor(){
 		old_histogram[i] = uint64(0)
 	}
 	amfself := GetSelf()
-	cnt := 0
+	mv_avg := AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
 	for true{
 		metrics.Read(sample)
 		data := fmt.Sprintf("%d  %.5f  %.5f  %.5f %d\n", len(amfself.PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), medianBucket(sample[0].Value.Float64Histogram(), old_histogram), MaxBucket(sample[0].Value.Float64Histogram(), old_histogram), WorkerAmount_pdu)
 
 		file.WriteString(data)
 		//add or remove worker if the load wasn't optimized
-		if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)>=float64(threshold) && WorkerAmount_pdu>1 && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)) {
-			if cnt >= 0{
-				cnt += 1
-			}else{
-				cnt = 0
-			}
-			if cnt > 1{
-				WorkerAmount_pdu -= 1
-				amfself.PduSessionEstReqCounter.Limit -= 1
-				cnt = 0
-			}
-		}else if AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)<float64(threshold) && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)){
-			if cnt <= 0{
-				cnt -= 1
-			}else{
-				cnt = 0
-			}
-			if cnt < -1{
-				WorkerAmount_pdu += 1
-				amfself.PduSessionEstReqCounter.Limit += 1
-				cnt = 0
-			}
+		mv_avg = 0.5 * mv_avg + 0.5 * AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
+		if mv_avg>=float64(threshold) && WorkerAmount_pdu>1 && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)) {
+			WorkerAmount_pdu -= 1
+			amfself.PduSessionEstReqCounter.Limit -= 1
+		}else if mv_avg<float64(threshold) && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)){
+			WorkerAmount_pdu += 1
+			amfself.PduSessionEstReqCounter.Limit += 1
 			amfself.PduSessionEstReqCounter.SignalChan <- true
 		}
 		update_old_histogram(sample[0].Value.Float64Histogram(), old_histogram)

@@ -50,9 +50,12 @@ func PduSessionEstReqHandler() {
 		go func(e context.PduSessionEstablishmentRequestElem) {
 			e.DoneChan <- transport5GSMMessage(e.Ue, e.AnType, e.UlNasTransport)
 		}(elem)
-		if counterValue >= amfSelf.WorkerAmount_pdu {
-			elem.Ue.GmmLog.Infoln("Counter up to limit, wait for signal")
-			<-amfSelf.PduSessionEstReqCounter.SignalChan
+		// if counterValue >= amfSelf.WorkerAmount_pdu {
+		// 	elem.Ue.GmmLog.Infoln("Counter up to limit, wait for signal")
+		// 	<-amfSelf.PduSessionEstReqCounter.SignalChan
+		// }
+		for counterValue >= amfSelf.PduSessionEstReqCounter.GetLimit() {
+			counterValue = amfSelf.PduSessionEstReqCounter.GetLoad()
 		}
 	}
 }

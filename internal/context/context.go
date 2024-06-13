@@ -31,14 +31,15 @@ var (
 	tmsiGenerator                    *idgenerator.IDGenerator = nil
 	amfUeNGAPIDGenerator             *idgenerator.IDGenerator = nil
 	amfStatusSubscriptionIDGenerator *idgenerator.IDGenerator = nil
-	WorkerAmount_pdu int32 = 4
+	WorkerAmount_pdu int32 = 1
 )
 
 const (
 	QueueSize_pdu    int   = 128
 	QueueSize_handover    int   = 128
 	WorkerAmount_handover int32 = 8
-	threshold float64 = 0.01
+	threshold float64 = 0.05
+	sensetivity float64 = 0.7
 )
 
 func monitor(){
@@ -56,20 +57,28 @@ func monitor(){
 	mv_avg := AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
 	for true{
 		metrics.Read(sample)
-		data := fmt.Sprintf("%d  %.5f  %.5f  %.5f %d\n", len(amfself.PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), medianBucket(sample[0].Value.Float64Histogram(), old_histogram), MaxBucket(sample[0].Value.Float64Histogram(), old_histogram), WorkerAmount_pdu)
+		mv_avg = (1-sensetivity) * mv_avg + sensetivity * AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
+		load := amfself.PduSessionEstReqCounter.GetLoad()
+		data := fmt.Sprintf("%d  %.5f  %.5f  %d %d\n", len(amfself.PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), mv_avg, load, amfself.PduSessionEstReqCounter.GetLimit())
 
 		file.WriteString(data)
-		//add or remove worker if the load wasn't optimized
-		mv_avg = 0.5 * mv_avg + 0.5 * AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
-		if mv_avg>=float64(threshold) && WorkerAmount_pdu>1 && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)) {
-			WorkerAmount_pdu -= 1
-			amfself.PduSessionEstReqCounter.Limit -= 1
-		}else if mv_avg<float64(threshold) && (len(amfself.PduSessionEstablishmentRequestChan)!=0 || amfself.PduSessionEstReqCounter.counter.Load()!=int32(0)){
-			WorkerAmount_pdu += 1
-			amfself.PduSessionEstReqCounter.Limit += 1
-			amfself.PduSessionEstReqCounter.SignalChan <- true
-		}
 		update_old_histogram(sample[0].Value.Float64Histogram(), old_histogram)
+		if len(amfself.PduSessionEstablishmentRequestChan) + int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()){
+			if int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()) && len(amfself.PduSessionEstablishmentRequestChan)>0{
+				//amfself.PduSessionEstReqCounter.SignalChan <- true
+			}
+			time.Sleep(500*time.Millisecond)
+			continue
+		}
+		//add or remove worker if the load wasn't optimized
+		if mv_avg>=float64(threshold) && amfself.PduSessionEstReqCounter.GetLimit()>1{
+			amfself.PduSessionEstReqCounter.ReduceLimit()
+		}else if mv_avg<float64(threshold){
+			amfself.PduSessionEstReqCounter.IncreaseLimit()
+			if len(amfself.PduSessionEstablishmentRequestChan)!=0 && load < amfself.PduSessionEstReqCounter.GetLimit(){
+				//amfself.PduSessionEstReqCounter.SignalChan <- true
+			}
+		}
 		time.Sleep(500*time.Millisecond)
 	}
 }
@@ -202,8 +211,26 @@ type N2HandoverRequiredElem struct {
 }
 
 
+func (c *PduSessionEstablishmentRequestCounter) IncreaseLimit() int32 {
+	c.Limit += 1
+	return c.Limit
+}
+
+func (c *PduSessionEstablishmentRequestCounter) ReduceLimit() int32 {
+	c.Limit -= 1
+	return c.Limit
+}
+
+func (c *PduSessionEstablishmentRequestCounter) GetLimit() int32 {
+	return c.Limit
+}
+
 func (c *PduSessionEstablishmentRequestCounter) AddOne() int32 {
 	c.counter.Add(1)
+	return c.counter.Load()
+}
+
+func (c *PduSessionEstablishmentRequestCounter) GetLoad() int32 {
 	return c.counter.Load()
 }
 
@@ -212,7 +239,7 @@ func (c *PduSessionEstablishmentRequestCounter) MinusOne() {
 	if c.counter.Load() == c.Limit {
 		c.counter.Add(-1)
 		logger.CtxLog.Infof("MinusOne send signal")
-		c.SignalChan <- true
+		//c.SignalChan <- true
 	} else {
 		c.counter.Add(-1)
 	}

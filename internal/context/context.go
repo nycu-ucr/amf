@@ -63,9 +63,9 @@ func monitor(){
 
 		file.WriteString(data)
 		update_old_histogram(sample[0].Value.Float64Histogram(), old_histogram)
-		if len(amfself.PduSessionEstablishmentRequestChan) + int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()){
+		if int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()){
 			if int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()) && len(amfself.PduSessionEstablishmentRequestChan)>0{
-				//amfself.PduSessionEstReqCounter.SignalChan <- true
+				amfself.PduSessionEstReqCounter.SignalChan <- true
 			}
 			time.Sleep(500*time.Millisecond)
 			continue
@@ -76,7 +76,7 @@ func monitor(){
 		}else if mv_avg<float64(threshold){
 			amfself.PduSessionEstReqCounter.IncreaseLimit()
 			if len(amfself.PduSessionEstablishmentRequestChan)!=0 && load < amfself.PduSessionEstReqCounter.GetLimit(){
-				//amfself.PduSessionEstReqCounter.SignalChan <- true
+				amfself.PduSessionEstReqCounter.SignalChan <- true
 			}
 		}
 		time.Sleep(500*time.Millisecond)
@@ -239,7 +239,7 @@ func (c *PduSessionEstablishmentRequestCounter) MinusOne() {
 	if c.counter.Load() == c.Limit {
 		c.counter.Add(-1)
 		logger.CtxLog.Infof("MinusOne send signal")
-		//c.SignalChan <- true
+		c.SignalChan <- true
 	} else {
 		c.counter.Add(-1)
 	}

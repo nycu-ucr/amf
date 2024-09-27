@@ -212,6 +212,8 @@ github.com/nycu-ucr/net v0.0.0-20230307082433-9b26c4d2ffa5/go.mod h1:YhEbietZ3Dj
 github.com/nycu-ucr/net v0.0.0-20230307120859-5f5d7afdaf03/go.mod h1:DOdS2y4k3JZ2dWZ9UHlhmfbSbxapyoykA9JsSELPR00=
 github.com/nycu-ucr/net v0.0.0-20231031091433-d01d59c308c0 h1:+m/WC2/upk7oQT+IJ0Z9ADvL+4Dg3gzZ5v1jxBL7HYE=
 github.com/nycu-ucr/net v0.0.0-20231031091433-d01d59c308c0/go.mod h1:eOurH0yMnRJNDVGndgJ/jCVZYX2F5tZofG+VP5AoDJw=
+github.com/nycu-ucr/net v0.0.0-20240927052029-2f95767a4aec h1:KexE6PKkwiY2FMLxk+ODFzkRcQBVvSOxoqgnp2tUA8I=
+github.com/nycu-ucr/net v0.0.0-20240927052029-2f95767a4aec/go.mod h1:eOurH0yMnRJNDVGndgJ/jCVZYX2F5tZofG+VP5AoDJw=
 github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94 h1:/Yc36gLetXJzKyhdEGK1tsABVzRnWjSxdqsOzifb2AI=
 github.com/nycu-ucr/ngap v0.0.0-20221011115449-b3ec2a164a94/go.mod h1:+oElDXseM9epVUkPPvv7li8i9b7q9G19ABRpMCFMrFU=
 github.com/nycu-ucr/oauth2 v0.0.0-20230927074609-e939447bd9b2 h1:RqP4Po28aFy+44yU7wr7EmotdoIHo2Ml/Py92sUd1wk=

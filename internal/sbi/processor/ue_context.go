@@ -3,17 +3,18 @@ package processor
 import (
 	"encoding/base64"
 	"encoding/hex"
-	"net/http"
 	"strings"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/free5gc/amf/internal/context"
-	gmm_common "github.com/free5gc/amf/internal/gmm/common"
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/amf/internal/nas/nas_security"
-	"github.com/free5gc/nas/security"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/gin"
+
+	"github.com/nycu-ucr/amf/internal/context"
+	gmm_common "github.com/nycu-ucr/amf/internal/gmm/common"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/nas/nas_security"
+	"github.com/nycu-ucr/nas/security"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 // TS 29.518 5.2.2.2.3

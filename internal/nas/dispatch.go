@@ -4,12 +4,12 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/gmm"
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/nas"
-	"github.com/free5gc/openapi/models"
-	"github.com/free5gc/util/fsm"
+	"github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/gmm"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/util/fsm"
+	"github.com/nycu-ucr/nas"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func Dispatch(ue *context.AmfUe, accessType models.AccessType, procedureCode int64, msg *nas.Message) error {

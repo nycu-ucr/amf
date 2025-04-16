@@ -3,10 +3,10 @@ package consumer
 import (
 	"sync"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nnssf_NSSelection "github.com/free5gc/openapi/nssf/NSSelection"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nnssf_NSSelection "github.com/nycu-ucr/openapi/nssf/NSSelection"
 )
 
 type nssfService struct {

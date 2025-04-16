@@ -4,10 +4,10 @@ import (
 	"context"
 	"reflect"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	Namf_Communication "github.com/free5gc/openapi/amf/Communication"
-	"github.com/free5gc/openapi/models"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	Namf_Communication "github.com/nycu-ucr/openapi/amf/Communication"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func SendAmfStatusChangeNotify(amfStatus string, guamiList []models.Guami) {

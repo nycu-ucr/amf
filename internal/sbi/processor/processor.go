@@ -1,8 +1,8 @@
 package processor
 
 import (
-	"github.com/free5gc/amf/internal/sbi/consumer"
-	"github.com/free5gc/amf/pkg/app"
+	"github.com/nycu-ucr/amf/internal/sbi/consumer"
+	"github.com/nycu-ucr/amf/pkg/app"
 )
 
 type ProcessorAmf interface {

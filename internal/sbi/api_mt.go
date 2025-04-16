@@ -1,11 +1,11 @@
 package sbi
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/logger"
 )
 
 func (s *Server) getMTRoutes() []Route {

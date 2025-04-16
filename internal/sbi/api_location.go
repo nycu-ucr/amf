@@ -10,13 +10,13 @@
 package sbi
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func (s *Server) getLocationRoutes() []Route {

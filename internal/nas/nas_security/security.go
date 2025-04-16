@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/nas"
-	"github.com/free5gc/nas/nasConvert"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/security"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/nas"
+	"github.com/nycu-ucr/nas/nasConvert"
+	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/nas/security"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func Encode(ue *context.AmfUe, msg *nas.Message, accessType models.AccessType) ([]byte, error) {

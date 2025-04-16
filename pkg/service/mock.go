@@ -12,10 +12,10 @@ package service
 import (
 	reflect "reflect"
 
-	context "github.com/free5gc/amf/internal/context"
-	consumer "github.com/free5gc/amf/internal/sbi/consumer"
-	processor "github.com/free5gc/amf/internal/sbi/processor"
-	factory "github.com/free5gc/amf/pkg/factory"
+	context "github.com/nycu-ucr/amf/internal/context"
+	consumer "github.com/nycu-ucr/amf/internal/sbi/consumer"
+	processor "github.com/nycu-ucr/amf/internal/sbi/processor"
+	factory "github.com/nycu-ucr/amf/pkg/factory"
 	gomock "go.uber.org/mock/gomock"
 )
 

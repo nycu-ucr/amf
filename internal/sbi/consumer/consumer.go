@@ -1,16 +1,16 @@
 package consumer
 
 import (
-	"github.com/free5gc/amf/pkg/app"
-	Namf_Communication "github.com/free5gc/openapi/amf/Communication"
-	Nausf_UEAuthentication "github.com/free5gc/openapi/ausf/UEAuthentication"
-	Nnrf_NFDiscovery "github.com/free5gc/openapi/nrf/NFDiscovery"
-	Nnrf_NFManagement "github.com/free5gc/openapi/nrf/NFManagement"
-	Nnssf_NSSelection "github.com/free5gc/openapi/nssf/NSSelection"
-	Npcf_AMPolicy "github.com/free5gc/openapi/pcf/AMPolicyControl"
-	Nsmf_PDUSession "github.com/free5gc/openapi/smf/PDUSession"
-	Nudm_SubscriberDataManagement "github.com/free5gc/openapi/udm/SubscriberDataManagement"
-	Nudm_UEContextManagement "github.com/free5gc/openapi/udm/UEContextManagement"
+	"github.com/nycu-ucr/amf/pkg/app"
+	Namf_Communication "github.com/nycu-ucr/openapi/amf/Communication"
+	Nausf_UEAuthentication "github.com/nycu-ucr/openapi/ausf/UEAuthentication"
+	Nnrf_NFDiscovery "github.com/nycu-ucr/openapi/nrf/NFDiscovery"
+	Nnrf_NFManagement "github.com/nycu-ucr/openapi/nrf/NFManagement"
+	Nnssf_NSSelection "github.com/nycu-ucr/openapi/nssf/NSSelection"
+	Npcf_AMPolicy "github.com/nycu-ucr/openapi/pcf/AMPolicyControl"
+	Nsmf_PDUSession "github.com/nycu-ucr/openapi/smf/PDUSession"
+	Nudm_SubscriberDataManagement "github.com/nycu-ucr/openapi/udm/SubscriberDataManagement"
+	Nudm_UEContextManagement "github.com/nycu-ucr/openapi/udm/UEContextManagement"
 )
 
 var consumer *Consumer

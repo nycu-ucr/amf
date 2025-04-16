@@ -1,20 +1,21 @@
 package processor
 
 import (
-	"net/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/free5gc/amf/internal/context"
-	gmm_message "github.com/free5gc/amf/internal/gmm/message"
-	"github.com/free5gc/amf/internal/logger"
-	ngap_message "github.com/free5gc/amf/internal/ngap/message"
-	callback "github.com/free5gc/amf/internal/sbi/processor/notifier"
+	"github.com/nycu-ucr/gin"
+
 	"github.com/free5gc/aper"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/ngap/ngapType"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/amf/internal/context"
+	gmm_message "github.com/nycu-ucr/amf/internal/gmm/message"
+	"github.com/nycu-ucr/amf/internal/logger"
+	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
+	callback "github.com/nycu-ucr/amf/internal/sbi/processor/notifier"
+	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/ngap/ngapType"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 // TS23502 4.2.3.3, 4.2.4.3, 4.3.2.2, 4.3.2.3, 4.3.3.2, 4.3.7

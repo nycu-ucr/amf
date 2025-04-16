@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"sync"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/pkg/factory"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nudm_SubscriberDataManagement "github.com/free5gc/openapi/udm/SubscriberDataManagement"
-	Nudm_UEContextManagement "github.com/free5gc/openapi/udm/UEContextManagement"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/pkg/factory"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nudm_SubscriberDataManagement "github.com/nycu-ucr/openapi/udm/SubscriberDataManagement"
+	Nudm_UEContextManagement "github.com/nycu-ucr/openapi/udm/UEContextManagement"
 )
 
 type nudmService struct {

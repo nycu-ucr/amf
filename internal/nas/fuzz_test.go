@@ -9,16 +9,16 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	amf_nas "github.com/free5gc/amf/internal/nas"
-	"github.com/free5gc/amf/internal/sbi/consumer"
-	"github.com/free5gc/amf/pkg/service"
-	"github.com/free5gc/nas"
-	"github.com/free5gc/nas/nasMessage"
-	"github.com/free5gc/nas/nasType"
-	"github.com/free5gc/ngap/ngapType"
-	"github.com/free5gc/openapi/models"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	amf_nas "github.com/nycu-ucr/amf/internal/nas"
+	"github.com/nycu-ucr/amf/internal/sbi/consumer"
+	"github.com/nycu-ucr/amf/pkg/service"
+	"github.com/nycu-ucr/ngap/ngapType"
+	"github.com/nycu-ucr/nas"
+	"github.com/nycu-ucr/nas/nasMessage"
+	"github.com/nycu-ucr/nas/nasType"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func FuzzHandleNAS(f *testing.F) {

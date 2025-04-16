@@ -7,14 +7,14 @@ import (
 	"sync"
 	"time"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/amf/internal/util"
-	"github.com/free5gc/amf/pkg/factory"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nnrf_NFDiscovery "github.com/free5gc/openapi/nrf/NFDiscovery"
-	Nnrf_NFManagement "github.com/free5gc/openapi/nrf/NFManagement"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/util"
+	"github.com/nycu-ucr/amf/pkg/factory"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nnrf_NFDiscovery "github.com/nycu-ucr/openapi/nrf/NFDiscovery"
+	Nnrf_NFManagement "github.com/nycu-ucr/openapi/nrf/NFManagement"
 )
 
 type nnrfService struct {

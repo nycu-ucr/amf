@@ -4,24 +4,25 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"net/http"
 	"runtime/debug"
 	"sync"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gonet/http"
+
+	"github.com/nycu-ucr/gin"
 	"github.com/sirupsen/logrus"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/amf/internal/sbi/consumer"
-	"github.com/free5gc/amf/internal/sbi/processor"
-	util_oauth "github.com/free5gc/amf/internal/util"
-	"github.com/free5gc/amf/pkg/app"
-	"github.com/free5gc/amf/pkg/factory"
-	"github.com/free5gc/openapi/models"
-	"github.com/free5gc/util/httpwrapper"
-	logger_util "github.com/free5gc/util/logger"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/sbi/consumer"
+	"github.com/nycu-ucr/amf/internal/sbi/processor"
+	util_oauth "github.com/nycu-ucr/amf/internal/util"
+	"github.com/nycu-ucr/amf/pkg/app"
+	"github.com/nycu-ucr/amf/pkg/factory"
+	"github.com/nycu-ucr/openapi/models"
+	"github.com/nycu-ucr/util/httpwrapper"
+	logger_util "github.com/nycu-ucr/util/logger"
 )
 
 var (

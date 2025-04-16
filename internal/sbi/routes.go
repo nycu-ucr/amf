@@ -1,6 +1,6 @@
 package sbi
 
-import "github.com/gin-gonic/gin"
+import "github.com/nycu-ucr/gin"
 
 type Route struct {
 	Name    string

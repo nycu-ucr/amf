@@ -9,18 +9,18 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/amf/internal/ngap"
-	ngap_message "github.com/free5gc/amf/internal/ngap/message"
-	ngap_service "github.com/free5gc/amf/internal/ngap/service"
-	"github.com/free5gc/amf/internal/sbi"
-	"github.com/free5gc/amf/internal/sbi/consumer"
-	"github.com/free5gc/amf/internal/sbi/processor"
-	callback "github.com/free5gc/amf/internal/sbi/processor/notifier"
-	"github.com/free5gc/amf/pkg/app"
-	"github.com/free5gc/amf/pkg/factory"
-	"github.com/free5gc/openapi/models"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/amf/internal/ngap"
+	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
+	ngap_service "github.com/nycu-ucr/amf/internal/ngap/service"
+	"github.com/nycu-ucr/amf/internal/sbi"
+	"github.com/nycu-ucr/amf/internal/sbi/consumer"
+	"github.com/nycu-ucr/amf/internal/sbi/processor"
+	callback "github.com/nycu-ucr/amf/internal/sbi/processor/notifier"
+	"github.com/nycu-ucr/amf/pkg/app"
+	"github.com/nycu-ucr/amf/pkg/factory"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 type AmfAppInterface interface {

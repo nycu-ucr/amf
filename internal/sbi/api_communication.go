@@ -2,14 +2,15 @@ package sbi
 
 import (
 	"fmt"
-	"net/http"
 	"strings"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/gin"
+
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 func Index(c *gin.Context) {

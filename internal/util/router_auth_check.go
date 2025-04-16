@@ -1,13 +1,13 @@
 package util
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	amf_context "github.com/free5gc/amf/internal/context"
-	"github.com/free5gc/amf/internal/logger"
-	"github.com/free5gc/openapi/models"
+	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/logger"
+	"github.com/nycu-ucr/openapi/models"
 )
 
 type RouterAuthorizationCheck struct {

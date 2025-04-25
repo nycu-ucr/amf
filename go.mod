@@ -16,10 +16,10 @@ require (
 	// github.com/free5gc/util v1.0.6
 	// github.com/nycu-ucr/gin v1.9.1
 	github.com/nycu-ucr/gin v0.0.0-20230307121200-573befe2dfbe
-	github.com/nycu-ucr/gonet v0.0.0-20231031091538-7b378fb19c77
+	github.com/nycu-ucr/gonet v0.0.0-20250423025127-ecbd471be7ee
 	github.com/nycu-ucr/nas v0.0.0-20250219150919-dbf6340e0fb2
 	github.com/nycu-ucr/ngap v0.0.0-20250219154040-87f9af69c8ce
-	github.com/nycu-ucr/openapi v0.0.0-20250401050632-3742ea1a1979
+	github.com/nycu-ucr/openapi v0.0.0-20250423030004-ca6aa49065b0
 	github.com/nycu-ucr/util v0.0.0-20230928120650-6ed674c090b3
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.3
@@ -59,8 +59,8 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/nycu-ucr/gock v0.0.0-20230928062355-60066588379a // indirect
-	github.com/nycu-ucr/net v0.0.0-20240927052029-2f95767a4aec // indirect
-	github.com/nycu-ucr/oauth2 v0.0.0-20250328130123-a6b55b90e0a9 // indirect
+	github.com/nycu-ucr/net v0.0.0-20250421092837-e154d11df6a2 // indirect
+	github.com/nycu-ucr/oauth2 v0.0.0-20250423025658-33ac33ae87b5 // indirect
 	github.com/nycu-ucr/onvmpoller v0.0.0-20230807070551-64ddd3797912 // indirect
 	github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.1 // indirect

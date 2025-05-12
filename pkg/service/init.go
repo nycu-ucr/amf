@@ -10,6 +10,7 @@ import (
 	"github.com/sirupsen/logrus"
 
 	amf_context "github.com/nycu-ucr/amf/internal/context"
+	"github.com/nycu-ucr/amf/internal/gmm"
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/internal/ngap"
 	ngap_message "github.com/nycu-ucr/amf/internal/ngap/message"
@@ -153,6 +154,10 @@ func (a *AmfApp) Start() {
 	if err := a.sbiServer.Run(context.Background(), &a.wg); err != nil {
 		logger.MainLog.Fatalf("Run SBI server failed: %+v", err)
 	}
+
+	go gmm.PduSessionEstReqHandler()
+	go ngap.N2HandoverReqHandler()
+	
 	a.WaitRoutineStopped()
 }
 

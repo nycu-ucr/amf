@@ -5,22 +5,27 @@ import (
 	"fmt"
 	"math"
 	"net"
+	"os"
 	"reflect"
+	"runtime/metrics"
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/nycu-ucr/ngap/ngapType"
 
 	"github.com/nycu-ucr/amf/internal/logger"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	"github.com/nycu-ucr/util/idgenerator"
 	"github.com/nycu-ucr/nas/nasConvert"
+	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/nas/security"
 	"github.com/nycu-ucr/openapi"
 	"github.com/nycu-ucr/openapi/models"
 	"github.com/nycu-ucr/openapi/oauth"
+	"github.com/nycu-ucr/util/idgenerator"
 )
 
 var (
@@ -28,7 +33,123 @@ var (
 	tmsiGenerator                    *idgenerator.IDGenerator = nil
 	amfUeNGAPIDGenerator             *idgenerator.IDGenerator = nil
 	amfStatusSubscriptionIDGenerator *idgenerator.IDGenerator = nil
+	WorkerAmount_pdu int32 = 1
 )
+
+const (
+	QueueSize_pdu    int   = 128
+	QueueSize_handover    int   = 128
+	WorkerAmount_handover int32 = 8
+	threshold float64 = 0.05
+	sensetivity float64 = 0.7
+)
+
+func monitor(){
+	file, _ := os.OpenFile("latancies.txt", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o666)
+	sample := make([]metrics.Sample, 2)
+	sample[0].Name = "/sched/latencies:seconds"
+	sample[1].Name = "/sched/goroutines:goroutines"
+	metrics.Read(sample)
+	old_histogram := make([]uint64, 1000)
+
+	for i:=0; i<1000; i++{
+		old_histogram[i] = uint64(0)
+	}
+	amfself := GetSelf()
+	mv_avg := AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
+	for true{
+		metrics.Read(sample)
+		mv_avg = (1-sensetivity) * mv_avg + sensetivity * AverageBucket(sample[0].Value.Float64Histogram(), old_histogram)
+		load := amfself.PduSessionEstReqCounter.GetLoad()
+		data := fmt.Sprintf("%d  %.5f  %.5f  %d %d\n", len(amfself.PduSessionEstablishmentRequestChan), AverageBucket(sample[0].Value.Float64Histogram(), old_histogram), mv_avg, load, amfself.PduSessionEstReqCounter.GetLimit())
+
+		file.WriteString(data)
+		update_old_histogram(sample[0].Value.Float64Histogram(), old_histogram)
+		if int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()){
+			if int(load) < int(amfself.PduSessionEstReqCounter.GetLimit()) && len(amfself.PduSessionEstablishmentRequestChan)>0{
+				amfself.PduSessionEstReqCounter.SignalChan <- true
+			}
+			time.Sleep(500*time.Millisecond)
+			continue
+		}
+		//add or remove worker if the load wasn't optimized
+		if mv_avg>=float64(threshold) && amfself.PduSessionEstReqCounter.GetLimit()>1{
+			amfself.PduSessionEstReqCounter.ReduceLimit()
+		}else if mv_avg<float64(threshold){
+			amfself.PduSessionEstReqCounter.IncreaseLimit()
+			if len(amfself.PduSessionEstablishmentRequestChan)!=0 && load < amfself.PduSessionEstReqCounter.GetLimit(){
+				amfself.PduSessionEstReqCounter.SignalChan <- true
+			}
+		}
+		time.Sleep(500*time.Millisecond)
+	}
+}
+
+func update_old_histogram(h *metrics.Float64Histogram, h_old []uint64) {
+	for i, count := range h.Counts {
+		h_old[i]=count
+	}
+	return
+}
+
+func medianBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
+	total := uint64(0)
+	for i, count := range h.Counts {
+		total = total + count - h_old[i]
+	}
+	thresh := total / 2
+	total = 0
+	for i, count := range h.Counts {
+		total += count - h_old[i]
+		if total >= thresh {
+			if i == 0{
+				return float64(0.0)
+			}
+			return h.Buckets[i]*1000
+		}
+	}
+	panic("should not happen")
+}
+
+func MaxBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
+	total := uint64(0)
+	for i, count := range h.Counts {
+		total = total + count - h_old[i]
+	}
+	thresh := total
+	total = 0
+	for i, count := range h.Counts {
+		total += count - h_old[i]
+		if total >= thresh {
+			if i == 0{
+				return float64(0.0)
+			}
+			return h.Buckets[i]*1000
+		}
+	}
+	panic("should not happen")
+}
+
+func AverageBucket(h *metrics.Float64Histogram, h_old []uint64) float64 {
+	total := uint64(0)
+	for i, count := range h.Counts {
+		total = total + count - h_old[i]
+	}
+	if total == 0{
+		return float64(0.0)
+	}
+	occurance := uint64(0)
+	sum := float64(0.0)
+	for i, count := range h.Counts {
+		occurance = count - h_old[i]
+		if i == 0 {
+			continue
+		}
+		sum += h.Buckets[i] * float64(occurance) * 1000
+	}
+	return sum / float64(total)
+	panic("should not happen")
+}
 
 func init() {
 	GetSelf().LadnPool = make(map[string]factory.Ladn)
@@ -40,9 +161,91 @@ func init() {
 	GetSelf().PlmnSupportList = make([]factory.PlmnSupportItem, 0, MaxNumOfPLMNs)
 	GetSelf().NfService = make(map[models.ServiceName]models.NrfNfManagementNfService)
 	GetSelf().NetworkName.Full = "free5GC"
+	GetSelf().PduSessionEstablishmentRequestChan = make(chan PduSessionEstablishmentRequestElem, QueueSize_pdu)
+	GetSelf().WorkerAmount_pdu = WorkerAmount_pdu
+	GetSelf().PduSessionEstReqCounter = &PduSessionEstablishmentRequestCounter{
+		Limit:      WorkerAmount_pdu,
+		SignalChan: make(chan bool, 10),
+		counter:    new(atomic.Int32),
+		lock:       new(sync.Mutex),
+		Lock:       new(sync.Mutex),
+		Ues:		make([]*AmfUe, 0),
+	}
+	GetSelf().N2HandoverRequiredChan = make(chan N2HandoverRequiredElem, QueueSize_handover)
+	GetSelf().N2HandoverReqCounter = &PduSessionEstablishmentRequestCounter{
+		Limit:      WorkerAmount_handover,
+		SignalChan: make(chan bool, 10),
+		counter:    new(atomic.Int32),
+		lock:       new(sync.Mutex),
+		Lock:       new(sync.Mutex),
+		Ues:		make([]*AmfUe, 0),
+	}
+	tmsiGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	tmsiGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfStatusSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
 	amfUeNGAPIDGenerator = idgenerator.NewGenerator(1, MaxValueOfAmfUeNgapId)
+	go monitor()
+}
+
+type PduSessionEstablishmentRequestElem struct {
+	Ue             *AmfUe
+	AnType         models.AccessType
+	UlNasTransport *nasMessage.ULNASTransport
+	DoneChan       chan error
+}
+
+type PduSessionEstablishmentRequestCounter struct {
+	Limit      int32
+	SignalChan chan bool
+	counter    *atomic.Int32
+	lock       *sync.Mutex
+	Lock       *sync.Mutex
+	Ues        []*AmfUe
+}
+
+type N2HandoverRequiredElem struct {
+	SourceUe	*RanUe
+	TargetRan	*AmfRan
+	Cause		ngapType.Cause
+	PduSessionReqList	ngapType.PDUSessionResourceSetupListHOReq
+	SourceToTargetTransparentContainer	ngapType.SourceToTargetTransparentContainer
+	Nsci		bool
+	//DoneChan	chan error
+}
+
+
+func (c *PduSessionEstablishmentRequestCounter) IncreaseLimit() int32 {
+	c.Limit += 1
+	return c.Limit
+}
+
+func (c *PduSessionEstablishmentRequestCounter) ReduceLimit() int32 {
+	c.Limit -= 1
+	return c.Limit
+}
+
+func (c *PduSessionEstablishmentRequestCounter) GetLimit() int32 {
+	return c.Limit
+}
+
+func (c *PduSessionEstablishmentRequestCounter) AddOne() int32 {
+	c.counter.Add(1)
+	return c.counter.Load()
+}
+
+func (c *PduSessionEstablishmentRequestCounter) GetLoad() int32 {
+	return c.counter.Load()
+}
+
+func (c *PduSessionEstablishmentRequestCounter) MinusOne() {
+	logger.CtxLog.Infof("Before MinusOne: %v", c.counter.Load())
+	if c.counter.Load() == c.Limit {
+		c.counter.Add(-1)
+		logger.CtxLog.Infof("MinusOne send signal")
+		c.SignalChan <- true
+	} else {
+		c.counter.Add(-1)
+	}
 }
 
 type NFContext interface {
@@ -94,6 +297,12 @@ type AMFContext struct {
 	Locality string
 
 	OAuth2Required bool
+
+	PduSessionEstablishmentRequestChan chan PduSessionEstablishmentRequestElem
+	PduSessionEstReqCounter            *PduSessionEstablishmentRequestCounter
+	N2HandoverRequiredChan chan N2HandoverRequiredElem
+	N2HandoverReqCounter            *PduSessionEstablishmentRequestCounter
+	WorkerAmount_pdu int32
 }
 
 type AMFContextEventSubscription struct {

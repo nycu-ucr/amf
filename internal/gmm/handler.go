@@ -25,19 +25,40 @@ import (
 	callback "github.com/nycu-ucr/amf/internal/sbi/processor/notifier"
 	"github.com/nycu-ucr/amf/internal/util"
 	"github.com/nycu-ucr/amf/pkg/factory"
-	"github.com/nycu-ucr/ngap/ngapConvert"
-	"github.com/nycu-ucr/ngap/ngapType"
-	"github.com/nycu-ucr/util/fsm"
 	"github.com/nycu-ucr/nas"
 	"github.com/nycu-ucr/nas/nasConvert"
 	"github.com/nycu-ucr/nas/nasMessage"
 	"github.com/nycu-ucr/nas/nasType"
 	"github.com/nycu-ucr/nas/security"
+	"github.com/nycu-ucr/ngap/ngapConvert"
+	"github.com/nycu-ucr/ngap/ngapType"
 	"github.com/nycu-ucr/openapi/models"
 	Nnrf_NFDiscovery "github.com/nycu-ucr/openapi/nrf/NFDiscovery"
+	"github.com/nycu-ucr/util/fsm"
 )
 
 const psiArraySize = 16
+
+
+func PduSessionEstReqHandler() {
+	amfSelf := context.GetSelf()
+	var counterValue int32
+
+	for elem := range amfSelf.PduSessionEstablishmentRequestChan {
+		counterValue = amfSelf.PduSessionEstReqCounter.AddOne()
+		elem.Ue.GmmLog.Infoln("Counter Value: ", counterValue)
+		go func(e context.PduSessionEstablishmentRequestElem) {
+			e.DoneChan <- transport5GSMMessage(e.Ue, e.AnType, e.UlNasTransport)
+		}(elem)
+		if counterValue >= amfSelf.PduSessionEstReqCounter.GetLimit() {
+			elem.Ue.GmmLog.Infoln("Counter up to limit, wait for signal")
+			<-amfSelf.PduSessionEstReqCounter.SignalChan
+		}
+		// for counterValue >= amfSelf.PduSessionEstReqCounter.GetLimit() {
+		// 	counterValue = amfSelf.PduSessionEstReqCounter.GetLoad()
+		// }
+	}
+}
 
 func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 	ulNasTransport *nasMessage.ULNASTransport,
@@ -51,7 +72,16 @@ func HandleULNASTransport(ue *context.AmfUe, anType models.AccessType,
 	switch ulNasTransport.GetPayloadContainerType() {
 	// TS 24.501 5.4.5.2.3 case a)
 	case nasMessage.PayloadContainerTypeN1SMInfo:
-		return transport5GSMMessage(ue, anType, ulNasTransport)
+		elem := context.PduSessionEstablishmentRequestElem{
+			Ue:             ue,
+			AnType:         anType,
+			UlNasTransport: ulNasTransport,
+			DoneChan:       make(chan error),
+		}
+		context.GetSelf().PduSessionEstReqCounter.Ues = append(context.GetSelf().PduSessionEstReqCounter.Ues, ue)
+		context.GetSelf().PduSessionEstablishmentRequestChan <- elem
+		return <-elem.DoneChan
+		// return transport5GSMMessage(ue, anType, ulNasTransport)
 	case nasMessage.PayloadContainerTypeSMS:
 		return fmt.Errorf("PayloadContainerTypeSMS has not been implemented yet in UL NAS TRANSPORT")
 	case nasMessage.PayloadContainerTypeLPP:

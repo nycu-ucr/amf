@@ -22,6 +22,25 @@ import (
 	"github.com/nycu-ucr/openapi/models"
 )
 
+func N2HandoverReqHandler() {
+	amfSelf := context.GetSelf()
+	var counterValue int32
+
+	for elem := range amfSelf.N2HandoverRequiredChan {
+		counterValue = amfSelf.N2HandoverReqCounter.AddOne()
+		elem.SourceUe.Log.Infoln("Counter Value: ", counterValue)
+		go func(e context.N2HandoverRequiredElem) {
+			ngap_message.SendHandoverRequest(e.SourceUe, e.TargetRan, e.Cause, e.PduSessionReqList,
+				e.SourceToTargetTransparentContainer, e.Nsci)
+			context.GetSelf().N2HandoverReqCounter.MinusOne()
+		}(elem)
+		if counterValue == amfSelf.N2HandoverReqCounter.Limit {
+			elem.SourceUe.Log.Infoln("Counter up to limit, wait for signal")
+			<-amfSelf.N2HandoverReqCounter.SignalChan
+		}
+	}
+}
+
 func handleNGSetupRequestMain(ran *context.AmfRan,
 	globalRANNodeID *ngapType.GlobalRANNodeID,
 	rANNodeName *ngapType.RANNodeName,
@@ -662,6 +681,20 @@ func handlePDUSessionResourceSetupResponseMain(ran *context.AmfRan,
 	if criticalityDiagnostics != nil {
 		printCriticalityDiagnostics(ran, criticalityDiagnostics)
 	}
+
+	context.GetSelf().PduSessionEstReqCounter.Lock.Lock()
+	for ith, req_ue := range context.GetSelf().PduSessionEstReqCounter.Ues {
+		if req_ue == amfUe {
+			context.GetSelf().PduSessionEstReqCounter.Ues[ith] = context.GetSelf().PduSessionEstReqCounter.Ues[len(context.GetSelf().PduSessionEstReqCounter.Ues)-1]
+			context.GetSelf().PduSessionEstReqCounter.Ues=context.GetSelf().PduSessionEstReqCounter.Ues[:len(context.GetSelf().PduSessionEstReqCounter.Ues)-1]
+			context.GetSelf().PduSessionEstReqCounter.MinusOne()
+			break
+		}
+		if ith == len(context.GetSelf().PduSessionEstReqCounter.Ues)-1{
+			ranUe.Log.Warnf("not in req list")
+		}
+	}
+	context.GetSelf().PduSessionEstReqCounter.Lock.Unlock()
 }
 
 func handlePDUSessionResourceModifyResponseMain(ran *context.AmfRan,
@@ -1214,7 +1247,7 @@ func handleHandoverNotifyMain(ran *context.AmfRan,
 
 		gmm_common.AttachRanUeToAmfUeAndReleaseOldHandover(amfUe, sourceUe, targetUe)
 	}
-
+	// context.GetSelf().N2HandoverReqCounter.MinusOne()
 	// TODO: The UE initiates Mobility Registration Update procedure as described in clause 4.2.2.2.2.
 }
 
@@ -1364,6 +1397,7 @@ func handleHandoverRequestAcknowledgeMain(ran *context.AmfRan,
 	targetToSourceTransparentContainer *ngapType.TargetToSourceTransparentContainer,
 	criticalityDiagnostics *ngapType.CriticalityDiagnostics,
 ) {
+	//defer context.GetSelf().N2HandoverReqCounter.MinusOne()
 	if criticalityDiagnostics != nil {
 		printCriticalityDiagnostics(ran, criticalityDiagnostics)
 	}
@@ -1629,8 +1663,19 @@ func handleHandoverRequiredMain(ran *context.AmfRan,
 				},
 			}
 		}
-		ngap_message.SendHandoverRequest(sourceUe, targetRan, *cause, pduSessionReqList,
-			*sourceToTargetTransparentContainer, false)
+
+		elem := context.N2HandoverRequiredElem{
+			SourceUe: sourceUe,
+			TargetRan: targetRan,
+			Cause: *cause,
+			PduSessionReqList: pduSessionReqList,
+			SourceToTargetTransparentContainer: *sourceToTargetTransparentContainer,
+			Nsci: false,
+			// DoneChan: make(chan error),
+		}
+		context.GetSelf().N2HandoverRequiredChan <- elem
+		// ngap_message.SendHandoverRequest(sourceUe, targetRan, *cause, pduSessionReqList,
+		// 	*sourceToTargetTransparentContainer, false)
 	}
 }
 

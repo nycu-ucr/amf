@@ -11580,9 +11580,6 @@ func handlerUplinkRANStatusTransfer(ran *context.AmfRan, initiatingMessage *ngap
 		ran.Log.Error("Missing IE RANStatusTransfer-TransparentContainer")
 		return
 	}
-	if rANStatusTransferTransparentContainer != nil {
-		ran.Log.Warn("IE RANStatusTransfer-TransparentContainer is not implemented")
-	}
 
 	// AMF: mandatory, reject
 	// RAN: mandatory, reject
@@ -11600,8 +11597,9 @@ func handlerUplinkRANStatusTransfer(ran *context.AmfRan, initiatingMessage *ngap
 	ranUe.Log.Infof("Handle UplinkRANStatusTransfer (RAN UE NGAP ID: %d)", ranUe.RanUeNgapId)
 
 	// func handleUplinkRANStatusTransferMain(ran *context.AmfRan,
-	//	ranUe *context.RanUe) {
-	handleUplinkRANStatusTransferMain(ran, ranUe)
+	//	ranUe *context.RanUe,
+	//	rANStatusTransferTransparentContainer *ngapType.RANStatusTransferTransparentContainer) {
+	handleUplinkRANStatusTransferMain(ran, ranUe, rANStatusTransferTransparentContainer)
 }
 
 func handlerUplinkUEAssociatedNRPPaTransport(ran *context.AmfRan, initiatingMessage *ngapType.InitiatingMessage) {

@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"time"
 
 	amf_context "github.com/nycu-ucr/amf/internal/context"
 	"github.com/nycu-ucr/amf/internal/util"
@@ -67,21 +66,12 @@ func (s *nsmfService) SelectSmf(
 	nrfUri := ue.ServingAMF().NrfUri // default NRF URI is pre-configured by AMF
 
 	nsiInformation := ue.GetNsiInformationFromSnssai(anType, snssai)
-	if nsiInformation == nil {
-		if ue.NssfUri == "" {
-			// TODO: Set a timeout of NSSF Selection or will starvation here
-			for {
-				searchReq := Nnrf_NFDiscovery.SearchNFInstancesRequest{}
-				if err := s.consumer.SearchNssfNSSelectionInstance(ue, nrfUri, models.NrfNfManagementNfType_NSSF,
-					models.NrfNfManagementNfType_AMF, &searchReq); err != nil {
-					ue.GmmLog.Errorf("AMF can not select an NSSF Instance by NRF[Error: %+v]", err)
-					time.Sleep(2 * time.Second)
-				} else {
-					break
-				}
-			}
-		}
-
+	if nsiInformation == nil && ue.NssfUri != "" {
+		// Only consult NSSF when one is explicitly configured. In a single-slice
+		// local deployment without an NSSF (amfcfg has no nssfUri), fall through
+		// and use the default, pre-configured NRF directly for SMF discovery.
+		// This avoids the NSSF NF-discovery loop whose SBI response can stall on
+		// the ONVM-XIO transport during PDU session establishment.
 		response, problemDetails, err := s.consumer.NSSelectionGetForPduSession(ue, snssai)
 		if err != nil {
 			err = fmt.Errorf("NSSelection Get Error[%+v]", err)
